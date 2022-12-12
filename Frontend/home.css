@@ -143,9 +143,13 @@ body {
 }
 
 .username {
-  width: 100%;
+  width: 71px;
+  display: inline-block;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
   text-align: center;
+  font-weight: 500;
   font-size: 12px;
   margin-top: 5px;
   color: rgba(0, 0, 0, 0.5);
