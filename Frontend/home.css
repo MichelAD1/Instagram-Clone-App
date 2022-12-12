@@ -73,10 +73,3 @@ body {
   margin: 0 10px;
   display: inline-block;
 }
-
-.user-profile {
-  width: 21px;
-  border-radius: 50%;
-  background-image: url(logos/account.png);
-  background-size: cover;
-}
