@@ -15,6 +15,8 @@ document.getElementById("search_icon").onclick = function () {
   search.style.display = "block";
   let searchh = document.querySelector(".search");
   searchh.style.display = "block";
+  let title = document.getElementById("title");
+  title.innerHTML = "Instagram";
 };
 document.getElementById("home_icon").onclick = function () {
   this.src = "logos/homefill.png";
@@ -27,6 +29,8 @@ document.getElementById("home_icon").onclick = function () {
   searchh.style.display = "none";
   let home = document.querySelector(".main-home");
   home.style.opacity = 1;
+  let title = document.getElementById("title");
+  title.innerHTML = "Instagram";
 };
 document.getElementById("add_icon").onclick = function () {
   this.src = "logos/addfill.png";
@@ -39,6 +43,8 @@ document.getElementById("add_icon").onclick = function () {
   searchh.style.display = "none";
   let home = document.querySelector(".main-home");
   home.style.opacity = 0;
+  let title = document.getElementById("title");
+  title.innerHTML = "Create Post";
 };
 document.getElementById("messenger_icon").onclick = function () {
   this.src = "logos/messengerfill.png";
@@ -51,6 +57,8 @@ document.getElementById("messenger_icon").onclick = function () {
   searchh.style.display = "none";
   let home = document.querySelector(".main-home");
   home.style.opacity = 0;
+  let title = document.getElementById("title");
+  title.innerHTML = "Instagram";
 };
 document.getElementById("explore_icon").onclick = function () {
   this.src = "logos/explorefill.png";
@@ -73,4 +81,6 @@ document.getElementById("acc_icon").onclick = function () {
   searchh.style.display = "none";
   let home = document.querySelector(".main-home");
   home.style.opacity = 0;
+  let title = document.getElementById("title");
+  title.innerHTML = "Michel @michelabidaoud";
 };
