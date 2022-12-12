@@ -25,6 +25,8 @@ document.getElementById("home_icon").onclick = function () {
   document.getElementById("acc_icon").src = "logos/account.png";
   let searchh = document.querySelector(".search");
   searchh.style.display = "none";
+  let home = document.querySelector(".main-home");
+  home.style.opacity = 1;
 };
 document.getElementById("add_icon").onclick = function () {
   this.src = "logos/addfill.png";
@@ -35,6 +37,8 @@ document.getElementById("add_icon").onclick = function () {
   document.getElementById("acc_icon").src = "logos/account.png";
   let searchh = document.querySelector(".search");
   searchh.style.display = "none";
+  let home = document.querySelector(".main-home");
+  home.style.opacity = 0;
 };
 document.getElementById("messenger_icon").onclick = function () {
   this.src = "logos/messengerfill.png";
@@ -45,6 +49,8 @@ document.getElementById("messenger_icon").onclick = function () {
   document.getElementById("acc_icon").src = "logos/account.png";
   let searchh = document.querySelector(".search");
   searchh.style.display = "none";
+  let home = document.querySelector(".main-home");
+  home.style.opacity = 0;
 };
 document.getElementById("explore_icon").onclick = function () {
   this.src = "logos/explorefill.png";
@@ -53,6 +59,8 @@ document.getElementById("explore_icon").onclick = function () {
   document.getElementById("messenger_icon").src = "logos/messenger.png";
   document.getElementById("home_icon").src = "logos/home.png";
   document.getElementById("acc_icon").src = "logos/account.png";
+  let home = document.querySelector(".main-home");
+  home.style.opacity = 0;
 };
 document.getElementById("acc_icon").onclick = function () {
   this.src = "logos/accountfill.png";
@@ -63,4 +71,6 @@ document.getElementById("acc_icon").onclick = function () {
   document.getElementById("explore_icon").src = "logos/explore.png";
   let searchh = document.querySelector(".search");
   searchh.style.display = "none";
+  let home = document.querySelector(".main-home");
+  home.style.opacity = 0;
 };
