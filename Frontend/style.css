@@ -1,0 +1,10 @@
+@media (max-width: 768px) {
+  body {
+    padding: 2rem 0;
+  }
+
+  .login-card {
+    width: 280px;
+    padding: 2rem;
+  }
+}
