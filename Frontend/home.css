@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 
 * {
+  display: flex;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -43,23 +44,25 @@ body {
   height: 100%;
   margin-top: 5px;
 }
-
-.search-box {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200px;
-  height: 25px;
+.search {
+  margin-top: -2px;
   background: #fafafa;
-  border: 1px solid #dfdfdf;
-  border-radius: 2px;
-  color: rgba(0, 0, 0, 0.5);
-  text-align: center;
-  text-transform: capitalize;
+  height: 30px;
+  border-radius: 30px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  margin-left: 300px;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
 }
 
-.search-box::placeholder {
-  color: rgba(0, 0, 0, 0.5);
+.search input {
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 230px;
+  font-weight: 500px;
+  font-size: 16px;
 }
 
 .nav-items {
@@ -72,4 +75,14 @@ body {
   cursor: pointer;
   margin: 0 10px;
   display: inline-block;
+}
+@media (max-width: 768px) {
+  body {
+    padding: 2rem 0;
+  }
+
+  .navbar {
+    width: 80px;
+    padding: 2rem;
+  }
 }
