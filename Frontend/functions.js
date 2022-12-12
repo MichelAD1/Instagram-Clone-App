@@ -58,7 +58,7 @@ document.getElementById("messenger_icon").onclick = function () {
   let home = document.querySelector(".main-home");
   home.style.opacity = 0;
   let title = document.getElementById("title");
-  title.innerHTML = "Instagram";
+  title.innerHTML = "Inbox - Chats";
 };
 document.getElementById("explore_icon").onclick = function () {
   this.src = "logos/explorefill.png";
@@ -69,6 +69,8 @@ document.getElementById("explore_icon").onclick = function () {
   document.getElementById("acc_icon").src = "logos/account.png";
   let home = document.querySelector(".main-home");
   home.style.opacity = 0;
+  let title = document.getElementById("title");
+  title.innerHTML = "Instagram";
 };
 document.getElementById("acc_icon").onclick = function () {
   this.src = "logos/accountfill.png";
