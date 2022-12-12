@@ -58,6 +58,7 @@ body {
   margin-left: -90px;
 }
 .splash {
+  opacity: 100;
   position: fixed;
   z-index: 200;
 }
