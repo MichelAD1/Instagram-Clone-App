@@ -4,6 +4,23 @@ let splashScreen = () => {
   }, 2300);
 };
 
+let loadHome = () => {
+  let home_icon = document.getElementById("home_icon");
+  home_icon.src = "logos/homefill.png";
+  document.getElementById("search_icon").src = "logos/search.png";
+  document.getElementById("add_icon").src = "logos/add.png";
+  document.getElementById("messenger_icon").src = "logos/messenger.png";
+  document.getElementById("explore_icon").src = "logos/explore.png";
+  document.getElementById("acc_icon").src = "logos/account.png";
+  let searchh = document.querySelector(".search");
+  searchh.style.display = "none";
+  let home = document.querySelector(".main-home");
+  home.style.opacity = 1;
+  let explore = document.querySelector(".explore");
+  explore.style.opacity = 0;
+  let title = document.getElementById("title");
+  title.innerHTML = "Instagram";
+};
 document.getElementById("search_icon").onclick = function () {
   this.src = "logos/searchfill.png";
   document.getElementById("home_icon").src = "logos/home.png";
@@ -29,6 +46,8 @@ document.getElementById("home_icon").onclick = function () {
   searchh.style.display = "none";
   let home = document.querySelector(".main-home");
   home.style.opacity = 1;
+  let explore = document.querySelector(".explore");
+  explore.style.opacity = 0;
   let title = document.getElementById("title");
   title.innerHTML = "Instagram";
 };
@@ -43,6 +62,8 @@ document.getElementById("add_icon").onclick = function () {
   searchh.style.display = "none";
   let home = document.querySelector(".main-home");
   home.style.opacity = 0;
+  let explore = document.querySelector(".explore");
+  explore.style.opacity = 0;
   let title = document.getElementById("title");
   title.innerHTML = "Create Post";
 };
@@ -57,6 +78,8 @@ document.getElementById("messenger_icon").onclick = function () {
   searchh.style.display = "none";
   let home = document.querySelector(".main-home");
   home.style.opacity = 0;
+  let explore = document.querySelector(".explore");
+  explore.style.opacity = 0;
   let title = document.getElementById("title");
   title.innerHTML = "Inbox - Chats";
 };
@@ -67,8 +90,12 @@ document.getElementById("explore_icon").onclick = function () {
   document.getElementById("messenger_icon").src = "logos/messenger.png";
   document.getElementById("home_icon").src = "logos/home.png";
   document.getElementById("acc_icon").src = "logos/account.png";
+  let searchh = document.querySelector(".search");
+  searchh.style.display = "none";
   let home = document.querySelector(".main-home");
   home.style.opacity = 0;
+  let explore = document.querySelector(".explore");
+  explore.style.opacity = 1;
   let title = document.getElementById("title");
   title.innerHTML = "Instagram";
 };
@@ -83,6 +110,8 @@ document.getElementById("acc_icon").onclick = function () {
   searchh.style.display = "none";
   let home = document.querySelector(".main-home");
   home.style.opacity = 0;
+  let explore = document.querySelector(".explore");
+  explore.style.opacity = 0;
   let title = document.getElementById("title");
   title.innerHTML = "Michel @michelabidaoud";
 };
