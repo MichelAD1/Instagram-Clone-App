@@ -387,6 +387,31 @@ body {
   background: white;
   border: 1px solid #dfdfdf;
 }
+.inbox-display {
+  margin-top: -500px;
+  margin-left: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 600px;
+  height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background: white;
+  border: 1px solid #dfdfdf;
+}
+.sentto-inbox {
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 600px;
+  height: 60px;
+  background: white;
+  border: 1px solid #dfdfdf;
+  margin-top: -10px;
+  margin-left: 280px;
+}
 .chat-card {
   cursor: pointer;
   flex: 0 0 auto;
@@ -397,7 +422,21 @@ body {
   align-items: center;
   margin-left: 5px;
 }
-
+.profile-pic-chatting {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 3px;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+.profile-pic-chatting img {
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+  border-radius: 50%;
+}
 .profile-pic-chat {
   width: 70px;
   height: 70px;
@@ -406,13 +445,47 @@ body {
   padding: 3px;
   margin-top: 25px;
 }
+
 .profile-pic-chat img {
   width: 80%;
   height: 80%;
   object-fit: cover;
   border-radius: 50%;
 }
+.chat-content {
+  height: 83%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column-reverse;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  padding-bottom: 1em;
+}
 
+.messages {
+  max-width: 50%;
+
+  padding: 0.7em;
+  border: 1px solid #dee2e6;
+  border-radius: 25px;
+  margin-top: 0.7em;
+}
+
+.user-sent {
+  align-self: flex-end;
+  background-color: rgb(0,  0,  0,  0.2);
+}
+.username-chatting {
+  cursor: default;
+  width: 140px;
+  display: inline-block;
+  text-align: start;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 22px;
+  margin-left: 0px;
+  color: rgb(0, 0, 0);
+}
 .username-chat {
   width: 111px;
   display: inline-block;
