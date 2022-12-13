@@ -432,7 +432,7 @@ option[value="2"] {
   width: 400px;
 }
 
-.profile-card {
+.account-card {
   display: flex;
   position: absolute;
   text-align: start;
