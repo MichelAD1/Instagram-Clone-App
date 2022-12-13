@@ -278,6 +278,20 @@ body {
   color: rgb(0, 162, 255);
   opacity: 1;
 }
+.send-message-btn {
+  margin-top: -32px;
+  width: 70px;
+  margin-left: 490px;
+  cursor: pointer;
+  height: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  text-transform: capitalize;
+  font-size: 16px;
+  color: rgb(0, 162, 255);
+  opacity: 1;
+}
 
 .reaction-wrapper {
   width: 100%;
@@ -449,13 +463,29 @@ body {
   border-radius: 50%;
 }
 .chat-content {
-  height: 85%;
+  height: 83%;
   overflow: auto;
   display: flex;
   flex-direction: column-reverse;
   padding-left: 1.5em;
   padding-right: 1.5em;
   padding-bottom: 1em;
+}
+.send-message {
+  position: absolute;
+  border: 1px solid rgb(164, 164, 164);
+  border-radius: 20px;
+  width: 550px;
+  height: 50px;
+  margin-top: 430px;
+  margin-left: 20px;
+}
+.send-message input {
+  width: 516px;
+  height: 46px;
+  border: none;
+  margin-top: 0px;
+  margin-left: 20px;
 }
 
 .messages {

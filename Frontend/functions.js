@@ -12,6 +12,10 @@ let displayMessages = () => {
   let inbox = document.querySelector(".inbox-display");
   inbox.style.display = "flex";
 };
+let displaySend = () => {
+  let send = document.querySelector(".send-message-btn");
+  send.style.display = "flex";
+};
 
 let goToAccount = () => {
   window.location.href = "../Frontend/account.html";
