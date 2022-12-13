@@ -15,7 +15,7 @@
   <body onload="loadHome()">
     <nav class="navbar">
       <div class="nav-wrapper">
-        <img src="logos/logo.PNG" class="brand-img" alt="" />
+        <img src="logos/logo.png" class="brand-img" alt="" />
         <div style="display: none" class="search">
           <input
             id="search"
@@ -29,12 +29,12 @@
           <img id="home_icon" src="logos/home.png" class="icon" alt="" />
           <img
             id="messenger_icon"
-            src="logos/messenger.PNG"
+            src="logos/messenger.png"
             class="icon"
             alt=""
           />
-          <img id="add_icon" src="logos/add.PNG" class="icon" alt="" />
-          <img id="explore_icon" src="logos/explore.PNG" class="icon" alt="" />
+          <img id="add_icon" src="logos/add.png" class="icon" alt="" />
+          <img id="explore_icon" src="logos/explore.png" class="icon" alt="" />
           <img id="acc_icon" src="logos/account.png" class="icon" alt="" />
         </div>
       </div>
@@ -80,13 +80,19 @@
                 </div>
                 <p class="username">Michel</p>
               </div>
-              <img src="logos/option.PNG" class="options" alt="" />
+              <img src="logos/option.png" class="options" alt="" />
             </div>
             <img src="logos/cover 1.png" class="post-image" alt="" />
             <div class="post-content">
               <div class="reaction-wrapper">
-                <img src="logos/like.PNG" class="icon" alt="" />
-                <img src="logos/comment.PNG" class="icon" alt="" />
+                <img
+                  id="like_icon"
+                  onclick="likePost()"
+                  src="logos/like.png"
+                  class="icon"
+                  alt=""
+                />
+                <img src="logos/comment.png" class="icon" alt="" />
               </div>
               <p class="likes">1,012 likes</p>
               <p class="description">

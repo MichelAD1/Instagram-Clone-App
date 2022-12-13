@@ -16,6 +16,18 @@ let displaySend = () => {
   let send = document.querySelector(".send-message-btn");
   send.style.display = "flex";
 };
+let likePost = () => {
+  let like = document.getElementById("like_icon").src;
+  let name = like.split("/").pop();
+  console.log(name);
+  like = document.getElementById("like_icon");
+  if (name === "like.png") {
+    like.src = "logos/likefill.png";
+  }
+  if (name === "likefill.png") {
+    like.src = "logos/like.png";
+  }
+};
 
 let goToAccount = () => {
   window.location.href = "../Frontend/account.html";
