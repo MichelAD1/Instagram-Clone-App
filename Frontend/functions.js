@@ -53,6 +53,26 @@ let loadAccount = () => {
   let title = document.getElementById("title");
   title.innerHTML = "My Account";
 };
+let loadMessenger = () => {
+  let mes_icon = document.getElementById("messenger_icon");
+  mes_icon.src = "logos/messengerfill.png";
+  document.getElementById("explore_icon").onclick = function () {
+    window.location.href = "../Frontend/explore.html";
+  };
+  document.getElementById("add_icon").onclick = function () {
+    window.location.href = "../Frontend/addPostStory.html";
+  };
+  document.getElementById("acc_icon").onclick = function () {
+    window.location.href = "../Frontend/account.html";
+  };
+  document.getElementById("home_icon").onclick = function () {
+    window.location.href = "../Frontend/home.html";
+  };
+  let searchh = document.querySelector(".search");
+  searchh.style.display = "none";
+  let title = document.getElementById("title");
+  title.innerHTML = "Chat - Inbox";
+};
 let loadExplore = () => {
   let explore_icon = document.getElementById("explore_icon");
   explore_icon.src = "logos/explorefill.png";
