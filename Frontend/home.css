@@ -450,7 +450,7 @@ option[value="2"] {
 .pic {
   display: inline-block;
   padding: 8px;
-  background: linear-gradient(130deg, #74b9ff, #e66767);
+  background: linear-gradient(130deg, #ffb47b, #ff4545);
   margin: auto;
   border-radius: 50%;
   background-size: 200% 200%;
@@ -557,6 +557,40 @@ option[value="2"] {
   font-family: "Ubuntu", sans-serif;
   box-sizing: border-box;
   text-decoration: none;
+}
+.profile-posts {
+  width: 100%;
+  display: flex;
+  margin-top: -220px;
+  margin-left: 10%;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.profile-post-size {
+  object-fit: cover;
+  max-width: 290px;
+  min-width: 290px;
+  min-height: 290px;
+  max-height: 290px;
+  margin: 0.5em;
+}
+.post-header {
+  position: absolute;
+  margin-top: -280px;
+  display: flex;
+  justify-content: center;
+  margin-left: 720px;
+  font-size: medium;
+}
+.post-border {
+  position: absolute;
+  margin-top: -250px;
+  display: flex;
+  justify-content: center;
+  margin-left: 650px;
+  border: 1px solid black;
+  width: 190px;
 }
 
 @media (max-width: 1100px) {
