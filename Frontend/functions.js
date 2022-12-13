@@ -6,6 +6,12 @@ let splashScreen = () => {
 let goToEdit = () => {
   window.location.href = "../Frontend/editprofile.html";
 };
+let displayMessages = () => {
+  let user = document.querySelector(".sentto-inbox");
+  user.style.display = "flex";
+  let inbox = document.querySelector(".inbox-display");
+  inbox.style.display = "flex";
+};
 
 let goToAccount = () => {
   window.location.href = "../Frontend/account.html";
