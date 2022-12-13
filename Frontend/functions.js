@@ -4,6 +4,12 @@ let splashScreen = () => {
   }, 2300);
 };
 
+let goToAccount = () => {
+  window.location.href = "../Frontend/account.html";
+};
+let goToAdd = () => {
+  window.location.href = "../Frontend/addPostStory.html";
+};
 let loadHome = () => {
   let home_icon = document.getElementById("home_icon");
   home_icon.src = "logos/homefill.png";
