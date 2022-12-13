@@ -30,6 +30,26 @@ let loadHome = () => {
   let title = document.getElementById("title");
   title.innerHTML = "Instagram";
 };
+let loadAccount = () => {
+  let acc_icon = document.getElementById("acc_icon");
+  acc_icon.src = "logos/accountfill.png";
+  document.getElementById("explore_icon").onclick = function () {
+    window.location.href = "../Frontend/explore.html";
+  };
+  document.getElementById("add_icon").onclick = function () {
+    window.location.href = "../Frontend/addPostStory.html";
+  };
+  document.getElementById("messenger_icon").onclick = function () {
+    window.location.href = "../Frontend/messenger.html";
+  };
+  document.getElementById("home_icon").onclick = function () {
+    window.location.href = "../Frontend/home.html";
+  };
+  let searchh = document.querySelector(".search");
+  searchh.style.display = "none";
+  let title = document.getElementById("title");
+  title.innerHTML = "My Account";
+};
 let loadExplore = () => {
   let explore_icon = document.getElementById("explore_icon");
   explore_icon.src = "logos/explorefill.png";
