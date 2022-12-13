@@ -419,11 +419,11 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: center;
+  text-align: start;
   font-weight: 400;
   font-size: 13px;
   margin-top: -50px;
-  margin-left: 160px;
+  margin-left: 180px;
   color: rgb(0, 0, 0);
 }
 .inbox > h2 {
