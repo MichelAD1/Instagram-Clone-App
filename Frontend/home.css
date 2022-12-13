@@ -106,12 +106,8 @@ body {
   padding-right: 0;
   display: flex;
   align-items: center;
-  overflow: hidden;
-  overflow-x: auto;
-}
-
-.status-wrapper::-webkit-scrollbar {
-  display: none;
+  overflow-y: hidden;
+  overflow-x: scroll;
 }
 
 .status-card {
