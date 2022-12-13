@@ -439,7 +439,7 @@ option[value="2"] {
   align-items: flex-start;
   justify-content: flex-start;
   margin-top: -350px;
-  margin-left: -1000px;
+  margin-left: -800px;
 }
 
 .card-header {
@@ -494,6 +494,7 @@ option[value="2"] {
 }
 .follow-btn {
   position: absolute;
+  width: 202px;
   padding: 12px 60px;
   text-decoration: none;
   color: #e66767;
