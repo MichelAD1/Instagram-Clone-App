@@ -3,6 +3,9 @@ let splashScreen = () => {
     window.location.href = "../Frontend/signin.html";
   }, 2300);
 };
+let goToEdit = () => {
+  window.location.href = "../Frontend/editprofile.html";
+};
 
 let goToAccount = () => {
   window.location.href = "../Frontend/account.html";
