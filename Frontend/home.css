@@ -432,6 +432,133 @@ option[value="2"] {
   width: 400px;
 }
 
+.profile-card {
+  display: flex;
+  position: absolute;
+  text-align: start;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: -350px;
+  margin-left: -1000px;
+}
+
+.card-header {
+  background: #fafafa;
+  padding: 60px 40px;
+}
+
+.pic {
+  display: inline-block;
+  padding: 8px;
+  background: linear-gradient(130deg, #74b9ff, #e66767);
+  margin: auto;
+  border-radius: 50%;
+  background-size: 200% 200%;
+  animation: animated-gradient 2s linear infinite;
+}
+
+@keyframes animated-gradient {
+  25% {
+    background-position: left bottom;
+  }
+  50% {
+    background-position: right bottom;
+  }
+  75% {
+    background-position: right top;
+  }
+  100% {
+    background-position: left top;
+  }
+}
+
+.pic img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.name {
+  color: #686868;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+.desc {
+  position: absolute;
+}
+.desc > p {
+  font-size: 18px;
+  color: #935252;
+}
+.follow-btn {
+  position: absolute;
+  padding: 12px 60px;
+  text-decoration: none;
+  color: #e66767;
+  border: 2px solid #e66767;
+  border-radius: 6px;
+  margin-top: -146px;
+  margin-left: 476px;
+  transition: 0.3s linear;
+}
+
+.follow-btn:hover {
+  background: #e66767;
+  color: #f2f2f2;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  margin-top: 90px;
+  margin-left: 0px;
+  background: #fafafa;
+  padding: 0px;
+}
+
+.numbers {
+  display: flex;
+  align-items: flex-start;
+}
+
+.item {
+  flex: 1;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: #e66767;
+}
+
+.item span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2c3a47;
+  font-size: 30px;
+}
+
+.border {
+  display: flex;
+  width: 0.7px;
+  height: 20px;
+  margin: 10px;
+  background: #bbb;
+}
+
+.profile-container {
+  height: 100vh;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  font-family: "Ubuntu", sans-serif;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
 @media (max-width: 1100px) {
   .right-col,
   .search-box {
