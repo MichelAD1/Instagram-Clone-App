@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -342,6 +342,94 @@ body {
   opacity: 1;
   font-weight: 700;
   font-size: 12px;
+}
+.form-post-story {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.form-post-story input[type="text"],
+.form-post-story input[type="file"] {
+  border: 1px;
+  outline: 5px;
+  border-color: black;
+  margin-left: 90px;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 1rem 1.5rem;
+  padding-left: calc(1rem * 3.5);
+  border-radius: 100px;
+  width: 100%;
+  transition: background 0.5s;
+}
+.form-post-story input:focus {
+  background: white;
+}
+.form-post-story .selector-type:focus {
+  background: white;
+}
+.selector-type {
+  margin-top: 20px;
+  border: 1px;
+  outline: 5px;
+  margin-left: 90px;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 1rem 1.5rem;
+  padding-left: calc(1rem * 3.5);
+  border-radius: 100px;
+  width: 100%;
+  transition: background 0.5s;
+}
+.add {
+  width: 100%;
+  height: auto;
+  background-image: linear-gradient(
+    to right,
+    rgb(228, 228, 228),
+    rgb(188, 188, 188),
+    rgba(179, 179, 179, 0.984),
+    rgb(166, 166, 166)
+  );
+  background-size: 600%;
+  border: 1px solid #dfdfdf;
+  border-radius: 15px;
+  margin-top: 40px;
+  transition: 1s;
+}
+.add:hover {
+  background-position: right;
+}
+option[value="2"] {
+  background-color: #ccc;
+  font-weight: bold;
+}
+
+.form-post-story button {
+  border: none;
+  border-radius: 10px;
+  width: 30%;
+  margin-left: 200px;
+  margin-bottom: 20px;
+  background-size: 300%;
+  background-image: linear-gradient(
+    to right,
+    rgb(243, 12, 12),
+    rgb(254, 161, 2),
+    rgb(171, 53, 108)
+  );
+  color: whitesmoke;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.form-post-story button:hover {
+  background-position: right;
+}
+
+.form-post-story .form-item {
+  position: relative;
+  width: 400px;
 }
 
 @media (max-width: 1100px) {

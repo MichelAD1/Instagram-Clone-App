@@ -44,6 +44,26 @@ let loadExplore = () => {
   let title = document.getElementById("title");
   title.innerHTML = "Instagram";
 };
+let loadAdd = () => {
+  let add_icon = document.getElementById("add_icon");
+  add_icon.src = "logos/addfill.png";
+  document.getElementById("home_icon").onclick = function () {
+    window.location.href = "../Frontend/home.html";
+  };
+  document.getElementById("explore_icon").onclick = function () {
+    window.location.href = "../Frontend/explore.html";
+  };
+  document.getElementById("messenger_icon").onclick = function () {
+    window.location.href = "../Frontend/messenger.html";
+  };
+  document.getElementById("acc_icon").onclick = function () {
+    window.location.href = "../Frontend/account.html";
+  };
+  let searchh = document.querySelector(".search");
+  searchh.style.display = "none";
+  let title = document.getElementById("title");
+  title.innerHTML = "Create Post/Story";
+};
 document.getElementById("search_icon").onclick = function () {
   this.src = "logos/searchfill.png";
   document.getElementById("home_icon").src = "logos/home.png";
@@ -70,6 +90,4 @@ document.getElementById("search_icon").onclick = function () {
   document.getElementById("acc_icon").onclick = function () {
     window.location.href = "../Frontend/account.html";
   };
-  let title = document.getElementById("title");
-  title.innerHTML = "Instagram";
 };
