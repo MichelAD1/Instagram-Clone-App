@@ -13,7 +13,8 @@
     <title id="title">Instagram</title>
   </head>
   <body onload="loadExplore()">
-    <nav class="navbar">
+    <nav id="nav" class="navbar">
+      <div id="overlay"></div>
       <div class="nav-wrapper">
         <img id="logo_icon" src="logos/logo.png" class="brand-img" alt="" />
         <div style="display: none" class="search">
@@ -49,6 +50,12 @@
     <div class="main-home">
       <div class="wrapper">
         <div class="left-col">
+          <div id="delete_pop" class="delete-popup">
+            <button data-delete-button class="delete-btn" id="delete_btn">
+              Delete Post
+            </button>
+            <button data-close-button class="x-btn">&times;</button>
+          </div>
           <div class="post">
             <div class="info">
               <div class="user">
@@ -57,7 +64,12 @@
                 </div>
                 <p class="username">Michel</p>
               </div>
-              <img src="logos/option.png" class="options" alt="" />
+              <img
+                data-delete-target="#delete_pop"
+                src="logos/option.png"
+                class="options"
+                alt=""
+              />
             </div>
             <img src="logos/cover 1.png" class="post-image" alt="" />
             <div class="post-content">
@@ -94,7 +106,12 @@
                 </div>
                 <p class="username">Michel</p>
               </div>
-              <img src="logos/option.png" class="options" alt="" />
+              <img
+                data-delete-target="#delete_pop"
+                src="logos/option.png"
+                class="options"
+                alt=""
+              />
             </div>
             <img src="logos/cover 1.png" class="post-image" alt="" />
             <div class="post-content">
