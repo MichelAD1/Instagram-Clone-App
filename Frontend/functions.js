@@ -1,7 +1,9 @@
 const openDeleteButtons = document.querySelectorAll("[data-delete-target]");
+const closeDeleteButtons = document.querySelectorAll("[data-close-button]");
 const openStory = document.querySelectorAll("[data-story-target]");
 const closeStory = document.querySelectorAll("[data-close-story-button]");
-const closeDeleteButtons = document.querySelectorAll("[data-close-button]");
+const openComment = document.querySelectorAll("[data-comment-target]");
+const closeComment = document.querySelectorAll("[data-close-comment-button]");
 const deleteDeleteButtons = document.querySelectorAll("[data-delete-button]");
 const overlay = document.getElementById("overlay");
 
@@ -15,6 +17,18 @@ closeDeleteButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const delete_option = button.closest(".delete-popup");
     closeOption(delete_option);
+  });
+});
+openComment.forEach((image) => {
+  image.addEventListener("click", () => {
+    const comment = document.querySelector(image.dataset.commentTarget);
+    displayComment(comment);
+  });
+});
+closeComment.forEach((button) => {
+  button.addEventListener("click", () => {
+    const comment = button.closest(".comment-popup");
+    closeComments(comment);
   });
 });
 
@@ -42,6 +56,12 @@ let displayStatus = (story) => {
   let nav = document.getElementById("nav");
   nav.classList.add("active");
 };
+let displayComment = (comment) => {
+  comment.classList.add("active");
+  overlay.classList.add("active");
+  let nav = document.getElementById("nav");
+  nav.classList.add("active");
+};
 let closeOption = (delete_option) => {
   delete_option.classList.remove("active");
   overlay.classList.remove("active");
@@ -49,8 +69,13 @@ let closeOption = (delete_option) => {
   nav.classList.remove("active");
 };
 let closeStatus = (story) => {
-  console.log("hi");
   story.classList.remove("active");
+  overlay.classList.remove("active");
+  let nav = document.getElementById("nav");
+  nav.classList.remove("active");
+};
+let closeComments = (comment) => {
+  comment.classList.remove("active");
   overlay.classList.remove("active");
   let nav = document.getElementById("nav");
   nav.classList.remove("active");
