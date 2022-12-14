@@ -11,6 +11,9 @@
   --prim-border-color: #dfdfdf;
   --prim-names-color: #000;
   --prim-comment-color: rgba(78, 78, 78, 0.822);
+  --prim-scroll-color: #999;
+  --prim-scroll-thumb-color: #888;
+  --prim-scroll-track-color: #ddd;
 }
 .dark-theme {
   --primary-color: #000106;
@@ -18,13 +21,28 @@
   --prim-border-color: #585858;
   --prim-names-color: rgb(233, 233, 233);
   --prim-comment-color: rgba(255, 255, 255, 0.822);
+  --prim-scroll-color: #000;
+  --prim-scroll-thumb-color: #555;
+  --prim-scroll-track-color: #222;
 }
 
 *:focus {
   outline: none;
 }
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: var(--prim-scroll-color);
+}
 
+::-webkit-scrollbar-thumb {
+  background-color: var(--prim-scroll-thumb-color);
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--prim-scroll-track-color);
+}
 body {
+  overflow-x: hidden;
   width: 100%;
   background: var(--primary-color);
   position: relative;
@@ -706,6 +724,7 @@ option[value="2"] {
 }
 
 .follow-btn:hover {
+  cursor: pointer;
   background: #e66767;
   color: #f2f2f2;
 }
