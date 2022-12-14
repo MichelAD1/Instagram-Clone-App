@@ -848,6 +848,26 @@ option[value="2"] {
 .delete-popup.active {
   transform: translate(-80%, -50%) scale(1);
 }
+.story-popup {
+  top: 50%;
+  right: 50%;
+  transform: translate(85%, -50%) scale(0);
+  transition: 100ms ease-in-out;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+}
+.story-popup > img {
+  object-fit: cover;
+  width: 350px;
+  margin-left: -100px;
+  height: 650px;
+}
+.story-popup.active {
+  transform: translate(85%, -50%) scale(1);
+}
 .delete-btn {
   cursor: pointer;
   font-weight: bold;
@@ -856,6 +876,19 @@ option[value="2"] {
   width: 190px;
   background-color: var(--prim-secondary-color);
 }
+.x-story-btn {
+  z-index: 100;
+  margin-top: -650px;
+  margin-left: 550px;
+  cursor: pointer;
+  font-weight: 100;
+  font-size: 10ex;
+  color: var(--prim-names-color);
+  border: none;
+  width: auto;
+  background-color: transparent;
+}
+
 .x-btn {
   margin-left: 80px;
   cursor: pointer;

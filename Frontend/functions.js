@@ -1,4 +1,6 @@
 const openDeleteButtons = document.querySelectorAll("[data-delete-target]");
+const openStory = document.querySelectorAll("[data-story-target]");
+const closeStory = document.querySelectorAll("[data-close-story-button]");
 const closeDeleteButtons = document.querySelectorAll("[data-close-button]");
 const deleteDeleteButtons = document.querySelectorAll("[data-delete-button]");
 const overlay = document.getElementById("overlay");
@@ -16,14 +18,39 @@ closeDeleteButtons.forEach((button) => {
   });
 });
 
+openStory.forEach((image) => {
+  image.addEventListener("click", () => {
+    const story = document.querySelector(image.dataset.storyTarget);
+    displayStatus(story);
+  });
+});
+closeStory.forEach((button) => {
+  button.addEventListener("click", () => {
+    const story = button.closest(".story-popup");
+    closeStatus(story);
+  });
+});
 let displayOption = (delete_option) => {
   delete_option.classList.add("active");
   overlay.classList.add("active");
   let nav = document.getElementById("nav");
   nav.classList.add("active");
 };
+let displayStatus = (story) => {
+  story.classList.add("active");
+  overlay.classList.add("active");
+  let nav = document.getElementById("nav");
+  nav.classList.add("active");
+};
 let closeOption = (delete_option) => {
   delete_option.classList.remove("active");
+  overlay.classList.remove("active");
+  let nav = document.getElementById("nav");
+  nav.classList.remove("active");
+};
+let closeStatus = (story) => {
+  console.log("hi");
+  story.classList.remove("active");
   overlay.classList.remove("active");
   let nav = document.getElementById("nav");
   nav.classList.remove("active");
