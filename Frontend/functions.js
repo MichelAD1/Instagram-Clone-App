@@ -140,6 +140,10 @@ let loadAccount = () => {
   title.innerHTML = "My Account";
 };
 let loadMessenger = () => {
+  let dark = localStorage.getItem("Dark");
+  if (dark === "on") {
+    changeThemePage();
+  }
   let mes_icon = document.getElementById("messenger_icon");
   mes_icon.src = "logos/messengerfill.png";
   document.getElementById("explore_icon").onclick = function () {
