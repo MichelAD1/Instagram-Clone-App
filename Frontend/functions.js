@@ -19,7 +19,6 @@ let displaySend = () => {
 let likePost = () => {
   let like = document.getElementById("like_icon").src;
   let name = like.split("/").pop();
-  console.log(name);
   like = document.getElementById("like_icon");
   if (name === "like.png") {
     like.src = "logos/likefill.png";
@@ -27,6 +26,63 @@ let likePost = () => {
   if (name === "likefill.png") {
     like.src = "logos/like.png";
   }
+};
+let changeTheme = () => {
+  let theme = document.getElementById("theme_icon");
+  let dark = localStorage.getItem("Dark");
+  let logo = document.getElementById("logo_icon").src;
+  let name = logo.split("/").pop();
+  logo = document.getElementById("logo_icon");
+  if (name === "logo.png") {
+    logo.src = "logos/logowhite.png";
+    logo.style.width = "90px";
+    logo.style.height = "25px";
+    logo.style.marginLeft = "4px";
+    logo.style.marginTop = "10px";
+  }
+  if (name === "logowhite.png") {
+    logo.src = "logos/logo.png";
+    logo.style.width = "10%";
+    logo.style.height = "100%";
+    logo.style.marginLeft = "0px";
+    logo.style.marginTop = "5px";
+  }
+  if (dark === "on") {
+    theme.src = "logos/moon.png";
+    localStorage.setItem("Dark", "off");
+  } else if (dark === "off") {
+    localStorage.setItem("Dark", "on");
+    theme.src = "logos/sun.png";
+  }
+
+  document.body.classList.toggle("dark-theme");
+};
+let changeThemePage = () => {
+  let theme = document.getElementById("theme_icon");
+  let dark = localStorage.getItem("Dark");
+  let logo = document.getElementById("logo_icon").src;
+  let name = logo.split("/").pop();
+  logo = document.getElementById("logo_icon");
+  if (name === "logo.png") {
+    logo.src = "logos/logowhite.png";
+    logo.style.width = "90px";
+    logo.style.height = "25px";
+    logo.style.marginLeft = "4px";
+    logo.style.marginTop = "10px";
+  }
+  if (name === "logowhite.png") {
+    logo.src = "logos/logo.png";
+    logo.style.width = "10%";
+    logo.style.height = "100%";
+    logo.style.marginLeft = "0px";
+    logo.style.marginTop = "5px";
+  }
+  if (dark === "on") {
+    theme.src = "logos/sun.png";
+  } else if (dark === "off") {
+    theme.src = "logos/moon.png";
+  }
+  document.body.classList.toggle("dark-theme");
 };
 
 let goToAccount = () => {
@@ -36,6 +92,10 @@ let goToAdd = () => {
   window.location.href = "../Frontend/addPostStory.html";
 };
 let loadHome = () => {
+  let dark = localStorage.getItem("Dark");
+  if (dark === "on") {
+    changeThemePage();
+  }
   let home_icon = document.getElementById("home_icon");
   home_icon.src = "logos/homefill.png";
   document.getElementById("explore_icon").onclick = function () {
@@ -56,6 +116,10 @@ let loadHome = () => {
   title.innerHTML = "Instagram";
 };
 let loadAccount = () => {
+  let dark = localStorage.getItem("Dark");
+  if (dark === "on") {
+    changeThemePage();
+  }
   let acc_icon = document.getElementById("acc_icon");
   acc_icon.src = "logos/accountfill.png";
   document.getElementById("explore_icon").onclick = function () {

@@ -8,6 +8,12 @@
 :root {
   --primary-color: #fafafa;
   --prim-secondary-color: #fff;
+  /* --primary-color: #000106;
+  --prim-secondary-color: rgb(37, 37, 37); */
+}
+.dark-theme {
+  --primary-color: #000106;
+  --prim-secondary-color: rgb(37, 37, 37);
 }
 
 *:focus {
@@ -45,6 +51,7 @@ body {
 }
 
 .brand-img {
+  width: 10%;
   height: 100%;
   margin-top: 5px;
 }
