@@ -188,6 +188,10 @@ let loadExplore = () => {
   title.innerHTML = "Instagram";
 };
 let loadAdd = () => {
+  let dark = localStorage.getItem("Dark");
+  if (dark === "on") {
+    changeThemePage();
+  }
   let add_icon = document.getElementById("add_icon");
   add_icon.src = "logos/addfill.png";
   document.getElementById("home_icon").onclick = function () {
