@@ -1,8 +1,39 @@
+const openDeleteButtons = document.querySelectorAll("[data-delete-target]");
+const closeDeleteButtons = document.querySelectorAll("[data-close-button]");
+const deleteDeleteButtons = document.querySelectorAll("[data-delete-button]");
+const overlay = document.getElementById("overlay");
+
+openDeleteButtons.forEach((image) => {
+  image.addEventListener("click", () => {
+    const delete_option = document.querySelector(image.dataset.deleteTarget);
+    displayOption(delete_option);
+  });
+});
+closeDeleteButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const delete_option = button.closest(".delete-popup");
+    closeOption(delete_option);
+  });
+});
+
+let displayOption = (delete_option) => {
+  delete_option.classList.add("active");
+  overlay.classList.add("active");
+  let nav = document.getElementById("nav");
+  nav.classList.add("active");
+};
+let closeOption = (delete_option) => {
+  delete_option.classList.remove("active");
+  overlay.classList.remove("active");
+  let nav = document.getElementById("nav");
+  nav.classList.remove("active");
+};
 let splashScreen = () => {
   setTimeout(() => {
     window.location.href = "../Frontend/signin.html";
   }, 2300);
 };
+
 let goToEdit = () => {
   window.location.href = "../Frontend/editprofile.html";
 };
