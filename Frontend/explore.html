@@ -15,7 +15,7 @@
   <body onload="loadExplore()">
     <nav class="navbar">
       <div class="nav-wrapper">
-        <img src="logos/logo.png" class="brand-img" alt="" />
+        <img id="logo_icon" src="logos/logo.png" class="brand-img" alt="" />
         <div style="display: none" class="search">
           <input
             id="search"
@@ -36,7 +36,13 @@
           <img id="add_icon" src="logos/add.png" class="icon" alt="" />
           <img id="explore_icon" src="logos/explore.png" class="icon" alt="" />
           <img id="acc_icon" src="logos/account.png" class="icon" alt="" />
-          <img id="theme_icon" src="logos/moon.png" class="icon" alt="" />
+          <img
+            onclick="changeTheme()"
+            id="theme_icon"
+            src="logos/moon.png"
+            class="icon"
+            alt=""
+          />
         </div>
       </div>
     </nav>

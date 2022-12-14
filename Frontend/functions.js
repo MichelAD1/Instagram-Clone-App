@@ -160,6 +160,10 @@ let loadMessenger = () => {
   title.innerHTML = "Chat - Inbox";
 };
 let loadExplore = () => {
+  let dark = localStorage.getItem("Dark");
+  if (dark === "on") {
+    changeThemePage();
+  }
   let explore_icon = document.getElementById("explore_icon");
   explore_icon.src = "logos/explorefill.png";
   document.getElementById("home_icon").onclick = function () {
