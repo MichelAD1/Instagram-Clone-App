@@ -2,11 +2,25 @@ const openDeleteButtons = document.querySelectorAll("[data-delete-target]");
 const closeDeleteButtons = document.querySelectorAll("[data-close-button]");
 const openStory = document.querySelectorAll("[data-story-target]");
 const closeStory = document.querySelectorAll("[data-close-story-button]");
+const closeStoryButton = document.querySelectorAll("[data-close-button]");
+const openLogout = document.querySelectorAll("[data-logout-target]");
 const openComment = document.querySelectorAll("[data-comment-target]");
 const closeComment = document.querySelectorAll("[data-close-comment-button]");
 const deleteDeleteButtons = document.querySelectorAll("[data-delete-button]");
 const overlay = document.getElementById("overlay");
 
+openLogout.forEach((image) => {
+  image.addEventListener("click", () => {
+    const logout = document.querySelector(image.dataset.logoutTarget);
+    displayLogout(logout);
+  });
+});
+closeStoryButton.forEach((button) => {
+  button.addEventListener("click", () => {
+    const logout = button.closest(".logout-popup");
+    closeLogout(logout);
+  });
+});
 openDeleteButtons.forEach((image) => {
   image.addEventListener("click", () => {
     const delete_option = document.querySelector(image.dataset.deleteTarget);
@@ -50,6 +64,12 @@ let displayOption = (delete_option) => {
   let nav = document.getElementById("nav");
   nav.classList.add("active");
 };
+let displayLogout = (logout) => {
+  logout.classList.add("active");
+  overlay.classList.add("active");
+  let nav = document.getElementById("nav");
+  nav.classList.add("active");
+};
 let displayStatus = (story) => {
   story.classList.add("active");
   overlay.classList.add("active");
@@ -64,6 +84,12 @@ let displayComment = (comment) => {
 };
 let closeOption = (delete_option) => {
   delete_option.classList.remove("active");
+  overlay.classList.remove("active");
+  let nav = document.getElementById("nav");
+  nav.classList.remove("active");
+};
+let closeLogout = (logout) => {
+  logout.classList.remove("active");
   overlay.classList.remove("active");
   let nav = document.getElementById("nav");
   nav.classList.remove("active");
@@ -349,6 +375,7 @@ let signUp = () => {
       .catch((err) => console.error(err.response.data));
   }
 };
+let logOut = () => {};
 let signIn = () => {
   let username = document.getElementById("username_form").value;
   let msg = document.querySelector(".empty-fields");
