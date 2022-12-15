@@ -349,3 +349,34 @@ let signUp = () => {
       .catch((err) => console.error(err.response.data));
   }
 };
+let signIn = () => {
+  let username = document.getElementById("username_form").value;
+  let msg = document.querySelector(".empty-fields");
+  let password = document.getElementById("password_form").value;
+  if (username === "" || password === "") {
+    msg.style.display = "block";
+    msg.innerHTML = "Please fill both fields";
+  } else {
+    let args = new FormData();
+    args.append("username", username.toLowerCase());
+    args.append("password", password);
+
+    axios({
+      method: "post",
+      url: "http://127.0.0.1:8000/api/v0.1/users/login",
+      data: args,
+    })
+      .then((res) => {
+        let resp = res["data"];
+        if (resp["User"] === "Not Found") {
+          console.log(resp["User"]);
+          msg.style.display = "block";
+          msg.innerHTML = "Incorrect username or password";
+        } else {
+          localStorage.setItem("Token", resp["authorisation"]);
+          window.location.href = "../Frontend/home.html";
+        }
+      })
+      .catch((err) => console.error(err.response.data));
+  }
+};

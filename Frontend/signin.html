@@ -47,7 +47,8 @@
                 required
               />
             </div>
-            <button id="login_button" type="button" onclick="loginHandler()">
+            <div style="display: none" class="empty-fields"></div>
+            <button id="login_button" type="button" onclick="signIn()">
               Sign In
             </button>
           </form>
@@ -59,6 +60,7 @@
         </div>
       </div>
     </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="functions.js" type="text/javascript"></script>
   </body>
 </html>
