@@ -224,6 +224,30 @@ let loadHome = () => {
   searchh.style.display = "none";
   let title = document.getElementById("title");
   title.innerHTML = "Instagram";
+  axios
+    .get("http://127.0.0.1:8000/api/v0.1/users/get", {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res) => {
+      let resp = res["data"];
+      let username = resp["User"]["username"];
+      let fullname = resp["User"]["full_name"];
+      let profile_picture = resp["User"]["profile_picture"];
+      let div = document.createElement("div");
+      div.setAttribute("class", "profile-card");
+      div.innerHTML = `<div class="profile-pic">
+      <img src="logos/${profile_picture}" alt="" />
+    </div>
+    <div>
+      <p class="usernamee">${username}</p>
+      <p class="sub-text">${fullname}</p>
+    </div>
+    <button onclick="goToEdit()" type="submit" class="action-btn">
+      Edit Profile
+    </button>`;
+      document.getElementById("home-profile").appendChild(div);
+    })
+    .catch((error) => console.log(error));
 };
 let loadAccount = () => {
   if (localStorage.getItem("Token") == null) {
