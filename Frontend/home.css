@@ -813,12 +813,11 @@ option[value="2"] {
 
 .account-card {
   display: flex;
-  position: absolute;
   text-align: start;
   align-items: flex-start;
   justify-content: flex-start;
   margin-top: -350px;
-  margin-left: -800px;
+  margin-left: -850px;
 }
 
 .card-header {
@@ -869,6 +868,7 @@ option[value="2"] {
 }
 .desc > p {
   font-size: 18px;
+  width: 45%;
   color: #935252;
 }
 .follow-btn {
@@ -1129,6 +1129,13 @@ option[value="2"] {
   }
   .wrapper {
     display: block;
+  }
+  .account-card {
+    width: 50%;
+    margin-left: -270px;
+  }
+  .desc {
+    width: 200%;
   }
 }
 
