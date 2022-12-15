@@ -204,7 +204,10 @@ body {
   cursor: pointer;
 }
 /* ---------- */
-
+.empty-fields {
+  text-align: center;
+  color: red;
+}
 /* Login Card Social Buttons */
 .login-card-social {
   display: flex;

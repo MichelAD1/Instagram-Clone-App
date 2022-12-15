@@ -320,26 +320,32 @@ let signUp = () => {
   let bio = document.getElementById("bio_form").value;
   let password = document.getElementById("password_form").value;
   let profile_picture;
-  if (document.getElementById("profile_form").files[0]) {
-    profile_picture = document.getElementById("profile_form").files[0].name;
+  if (username === "" || fullname === "" || bio === "" || password === "") {
+    let msg = document.querySelector(".empty-fields");
+    msg.style.display = "block";
   } else {
-    profile_picture = "noprofile.jpg";
-  }
-  let args = new FormData();
-  args.append("username", username.toLowerCase());
-  args.append("full_name", fullname);
-  args.append("password", password);
-  args.append("bio", bio);
-  args.append("profile_picture", profile_picture);
+    if (document.getElementById("profile_form").files[0]) {
+      profile_picture = document.getElementById("profile_form").files[0].name;
+    } else {
+      profile_picture = "noprofile.jpg";
+    }
+    let args = new FormData();
+    args.append("username", username.toLowerCase());
+    args.append("full_name", fullname);
+    args.append("password", password);
+    args.append("bio", bio);
+    args.append("profile_picture", profile_picture);
 
-  axios({
-    method: "post",
-    url: "http://127.0.0.1:8000/api/v0.1/users/signup",
-    data: args,
-  })
-    .then((res) => {
-      let resp = res["data"];
-      console.log(resp);
+    axios({
+      method: "post",
+      url: "http://127.0.0.1:8000/api/v0.1/users/signup",
+      data: args,
     })
-    .catch((err) => console.error(err.response.data));
+      .then((res) => {
+        let resp = res["data"];
+        localStorage.setItem("Token", resp["authorisation"]);
+        window.location.href = "../Frontend/home.html";
+      })
+      .catch((err) => console.error(err.response.data));
+  }
 };
