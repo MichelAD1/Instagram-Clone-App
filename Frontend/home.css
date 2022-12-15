@@ -103,11 +103,12 @@ body {
   padding: 10px 20px;
   display: flex;
   align-items: center;
-  margin-left: 270px;
+  margin-left: 250px;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
 }
 
 .search input {
+  margin-top: -5px;
   background: transparent;
   border: none;
   outline: none;
