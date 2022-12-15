@@ -408,6 +408,25 @@ let loadAdd = () => {
   let title = document.getElementById("title");
   title.innerHTML = "Create Post/Story";
 };
+let loadEditProfile = () => {
+  axios
+    .get("http://127.0.0.1:8000/api/v0.1/users/get", {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res) => {
+      let resp = res["data"];
+      let username = resp["User"]["username"];
+      let fullname = resp["User"]["full_name"];
+      let bio = resp["User"]["bio"];
+      let f = document.getElementById("fullname_form");
+      f.placeholder = fullname;
+      let u = document.getElementById("username_form");
+      u.placeholder = username;
+      let b = document.getElementById("bio_form");
+      b.placeholder = bio;
+    })
+    .catch((error) => console.log(error));
+};
 let search = () => {
   let search = document.getElementById("search_icon").src;
   let name = search.split("/").pop();
