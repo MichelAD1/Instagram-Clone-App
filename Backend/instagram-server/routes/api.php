@@ -10,6 +10,7 @@ Route::group(["prefix" => "v0.1"], function() {
         Route::post("login",[AuthController::class,"login"]);
         Route::post("signup",[AuthController::class,"register"]);
         Route::get("logout",[AuthController::class,"logout"]);
+        Route::get("get",[UserController::class,"getUser"]);
         Route::post("update",[UserController::class,"update"]);
     });
 	
