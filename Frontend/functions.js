@@ -198,6 +198,78 @@ let goToAccount = () => {
 let goToAdd = () => {
   window.location.href = "../Frontend/addPostStory.html";
 };
+let getProfileHome = () => {
+  axios
+    .get("http://127.0.0.1:8000/api/v0.1/users/get", {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res) => {
+      let resp = res["data"];
+      let username = resp["User"]["username"];
+      let fullname = resp["User"]["full_name"];
+      let profile_picture = resp["User"]["profile_picture"];
+      let div = document.createElement("div");
+      div.setAttribute("class", "profile-card");
+      div.innerHTML = `<div class="profile-pic">
+    <img src="logos/${profile_picture}" alt="" />
+  </div>
+  <div>
+    <p class="usernamee">${username}</p>
+    <p class="sub-text">${fullname}</p>
+  </div>
+  <button onclick="goToEdit()" type="submit" class="action-btn">
+    Edit Profile
+  </button>`;
+      document.getElementById("home-profile").appendChild(div);
+    })
+    .catch((error) => console.log(error));
+};
+let getProfileMain = () => {
+  axios
+    .get("http://127.0.0.1:8000/api/v0.1/users/get", {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res) => {
+      let resp = res["data"];
+      let username = resp["User"]["username"];
+      let fullname = resp["User"]["full_name"];
+      let bio = resp["User"]["bio"];
+      let profile_picture = resp["User"]["profile_picture"];
+      let div = document.createElement("div");
+      div.setAttribute("class", "account-card");
+      div.innerHTML = `<div class="card-header">
+      <div class="pic">
+        <img src="logos/${profile_picture}" alt="" />
+      </div>
+      <div class="username-profile">${username}</div>
+      <div class="name">${fullname}</div>
+      <div class="desc">
+        <p>${bio}</p>
+      </div>
+      <a onclick="goToEdit()" class="follow-btn">Edit Profile</a>
+    </div>
+    <div class="card-footer">
+      <div class="numbers">
+        <div class="item">
+          <span>1200</span>
+          Posts
+        </div>
+        <div class="border"></div>
+        <div class="item">
+          <span>127</span>
+          Following
+        </div>
+        <div class="border"></div>
+        <div class="item">
+          <span>120K</span>
+          Followers
+        </div>
+      </div>
+    </div>`;
+      document.getElementById("profile").appendChild(div);
+    })
+    .catch((error) => console.log(error));
+};
 let loadHome = () => {
   if (localStorage.getItem("Token") == null) {
     window.location.href = "../Frontend/signin.html";
@@ -224,30 +296,7 @@ let loadHome = () => {
   searchh.style.display = "none";
   let title = document.getElementById("title");
   title.innerHTML = "Instagram";
-  axios
-    .get("http://127.0.0.1:8000/api/v0.1/users/get", {
-      headers: { Authorization: localStorage.getItem("Token") },
-    })
-    .then((res) => {
-      let resp = res["data"];
-      let username = resp["User"]["username"];
-      let fullname = resp["User"]["full_name"];
-      let profile_picture = resp["User"]["profile_picture"];
-      let div = document.createElement("div");
-      div.setAttribute("class", "profile-card");
-      div.innerHTML = `<div class="profile-pic">
-      <img src="logos/${profile_picture}" alt="" />
-    </div>
-    <div>
-      <p class="usernamee">${username}</p>
-      <p class="sub-text">${fullname}</p>
-    </div>
-    <button onclick="goToEdit()" type="submit" class="action-btn">
-      Edit Profile
-    </button>`;
-      document.getElementById("home-profile").appendChild(div);
-    })
-    .catch((error) => console.log(error));
+  getProfileHome();
 };
 let loadAccount = () => {
   if (localStorage.getItem("Token") == null) {
@@ -276,50 +325,7 @@ let loadAccount = () => {
   searchh.style.display = "none";
   let title = document.getElementById("title");
   title.innerHTML = "My Account";
-  axios
-    .get("http://127.0.0.1:8000/api/v0.1/users/get", {
-      headers: { Authorization: localStorage.getItem("Token") },
-    })
-    .then((res) => {
-      let resp = res["data"];
-      let username = resp["User"]["username"];
-      let fullname = resp["User"]["full_name"];
-      let bio = resp["User"]["bio"];
-      let profile_picture = resp["User"]["profile_picture"];
-      let div = document.createElement("div");
-      div.setAttribute("class", "account-card");
-      div.innerHTML = `<div class="card-header">
-        <div class="pic">
-          <img src="logos/${profile_picture}" alt="" />
-        </div>
-        <div class="username-profile">${username}</div>
-        <div class="name">${fullname}</div>
-        <div class="desc">
-          <p>${bio}</p>
-        </div>
-        <a onclick="goToEdit()" class="follow-btn">Edit Profile</a>
-      </div>
-      <div class="card-footer">
-        <div class="numbers">
-          <div class="item">
-            <span>1200</span>
-            Posts
-          </div>
-          <div class="border"></div>
-          <div class="item">
-            <span>127</span>
-            Following
-          </div>
-          <div class="border"></div>
-          <div class="item">
-            <span>120K</span>
-            Followers
-          </div>
-        </div>
-      </div>`;
-      document.getElementById("profile").appendChild(div);
-    })
-    .catch((error) => console.log(error));
+  getProfileMain();
 };
 let loadMessenger = () => {
   if (localStorage.getItem("Token") == null) {
@@ -463,7 +469,7 @@ let logOut = () => {
     })
     .then((response) => {
       localStorage.removeItem("Token");
-      window.location.href = "../Frontend/signin.html";
+      window.location.href = "../Frontend/splash.html";
     })
     .catch((error) => console.log(error));
 };
