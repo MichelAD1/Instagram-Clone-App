@@ -25,15 +25,13 @@ class AuthController extends Controller
         $token = Auth::attempt($credentials);
         if (!$token) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Unauthorized',
-            ], 401);
+                "User" => "Not Found"
+            ]);
         }
 
         $user = Auth::user();
         return response()->json([
-                'status' => 'success',
-                'user' => $user,
+                'User' => $user,
                 'authorisation' => [
                     'token' => $token,
                     'type' => 'bearer',
@@ -43,48 +41,44 @@ class AuthController extends Controller
     }
 
     public function register(Request $request){
-        $request->validate([
-            'username' => 'required|string|max:255|unique:users',
-            'full_name' => 'required|string|max:255',
-            'password' => 'required|string|min:6',
-            'bio' => 'required|string',
-            // 'profile_picture' => 'required|string',
-        ]);
-
-        $user = User::create([
-            'username' => $request->username,
-            'full_name' => $request->full_name,
-            'password' => Hash::make($request->password),
-            'bio'=>$request->bio,
-            'profile_picture'=>$request->profile_picture
-        ]);
-
-        $token = Auth::login($user);
-        return response()->json([
-            'status' => 'success',
-            'message' => 'User created successfully',
-            'user' => $user,
-            'authorisation' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
-        ]);
+        $users = User::where("username", $request->username)->exists();
+        if($users){
+            return response()->json([
+                "User" => "Exist"
+            ]);
+        }else{
+            $user = User::create([
+                'username' => $request->username,
+                'full_name' => $request->full_name,
+                'password' => Hash::make($request->password),
+                'bio'=>$request->bio,
+                'profile_picture'=>$request->profile_picture
+            ]);
+    
+            $token = Auth::login($user);
+            return response()->json([
+                'User' => $user,
+                'authorisation' => [
+                    'token' => $token,
+                    'type' => 'bearer',
+                ]
+            ]);
+        }
+        
     }
 
     public function logout()
     {
         Auth::logout();
         return response()->json([
-            'status' => 'success',
-            'message' => 'Successfully logged out',
+            'User' => 'Logged out',
         ]);
     }
 
     public function refresh()
     {
         return response()->json([
-            'status' => 'success',
-            'user' => Auth::user(),
+            'User' => Auth::user(),
             'authorisation' => [
                 'token' => Auth::refresh(),
                 'type' => 'bearer',
