@@ -21,11 +21,12 @@
   --prim-scroll-track-color: #ddd;
   --prim-posts-color: rgb(0, 0, 0);
   --prim-border-posts-color: rgb(0, 0, 0);
+  --prim-input-color: rgb(0, 0, 0);
 }
 .dark-theme {
-  --primary-color: #000106;
-  --prim-secondary-color: rgb(74, 74, 74);
-  --prim-border-color: #585858;
+  --primary-color: rgb(0, 0, 0);
+  --prim-secondary-color: rgb(41, 41, 41);
+  --prim-border-color: #3d3d3d;
   --prim-names-color: rgb(233, 233, 233);
   --prim-comment-color: rgba(255, 255, 255, 0.822);
   --prim-scroll-color: #000;
@@ -33,6 +34,10 @@
   --prim-scroll-track-color: #222;
   --prim-posts-color: #585858;
   --prim-border-posts-color: #585858;
+  --prim-input-color: rgb(255, 255, 255);
+}
+input {
+  color: var(--prim-input-color);
 }
 
 *:focus {
@@ -272,6 +277,13 @@ body {
   font-weight: bold;
   color: var(--prim-names-color);
 }
+.likes-post {
+  position: absolute;
+  margin-top: 53px;
+  margin-left: 15px;
+  font-weight: bold;
+  color: var(--prim-names-color);
+}
 
 .description {
   margin: 10px 0;
@@ -353,6 +365,18 @@ body {
   display: flex;
   margin-top: -20px;
   align-items: center;
+}
+.post-like-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  margin-top: 50px;
+  margin-left: -20px;
+}
+.post-like-wrapper .icon {
+  height: 25px;
+  margin: 0;
+  margin-right: 10px;
 }
 
 .reaction-wrapper .icon {
@@ -464,6 +488,12 @@ body {
   background: var(--prim-secondary-color);
   border: 1px solid var(--prim-border-color);
 }
+.likes-section {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 375px;
+  margin-left: 36px;
+}
 .comments-display {
   display: flex;
   flex-direction: column;
@@ -473,7 +503,7 @@ body {
   margin-top: 50px;
   margin-left: 0px;
   width: 567px;
-  height: 525px;
+  height: 475px;
   background: var(--prim-secondary-color);
   border-bottom: 1px solid var(--prim-border-color);
 }
@@ -889,12 +919,12 @@ option[value="2"] {
 }
 
 .profile-container {
+  margin-top: -100px;
   height: 100vh;
   background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0;
   padding: 0;
   font-family: "Ubuntu", sans-serif;
   box-sizing: border-box;
@@ -910,6 +940,7 @@ option[value="2"] {
 }
 
 .profile-post-size {
+  cursor: pointer;
   object-fit: cover;
   max-width: 290px;
   min-width: 290px;
