@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('chats', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("posted_by");
-            $table->integer("count_likes");
-            $table->integer("count_comments");
-            $table->string("post_image");
-            $table->string("caption");
-            $table->foreign('posted_by')->references('id')->on('users');
+            $table->unsignedBigInteger("room_id");
+            $table->unsignedBigInteger("sender_id");
+            $table->string("message");
+            $table->foreign('room_id')->references('id')->on('rooms');
+            $table->foreign('sender_id')->references('id')->on('users');
             $table->timestamps();
-            
-            
         });
     }
 
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('chats');
     }
 };

@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('stories', function (Blueprint $table) {
             $table->id();
-            $table->integer("posted_by");
+            $table->unsignedBigInteger("posted_by");
             $table->string("story_image");
             $table->string("caption");
+            $table->foreign('posted_by')->references('id')->on('users');
             $table->timestamps();
         });
     }
