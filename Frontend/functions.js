@@ -430,3 +430,44 @@ let signIn = () => {
       .catch((err) => console.error(err.response.data));
   }
 };
+let update = () => {
+  let args = new FormData();
+  let msg = document.querySelector(".empty-fields");
+  if (document.getElementById("username_form")) {
+    let username = document.getElementById("username_form").value;
+    args.append("username", username.toLowerCase());
+  }
+  if (document.getElementById("fullname_form").value) {
+    let fullname = document.getElementById("fullname_form").value;
+    args.append("full_name", fullname);
+  }
+  if (document.getElementById("bio_form").value) {
+    let bio = document.getElementById("bio_form").value;
+    args.append("bio", bio);
+  }
+  if (document.getElementById("password_form").value) {
+    let password = document.getElementById("password_form").value;
+    args.append("password", password);
+  }
+  if (document.getElementById("profile_form").files[0]) {
+    let profile_picture = document.getElementById("profile_form").files[0].name;
+    console.log(profile_picture);
+    args.append("profile_picture", profile_picture);
+  }
+  axios
+    .post("http://127.0.0.1:8000/api/v0.1/users/update", args, {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res) => {
+      let resp = res["data"];
+      if (resp["User"] === "Invalid username") {
+        msg.style.display = "block";
+        msg.innerHTML = "Username exists";
+      } else {
+        msg.style.display = "block";
+        msg.style.color = "green";
+        msg.innerHTML = "Changes saved";
+      }
+    })
+    .catch((error) => console.log(error));
+};

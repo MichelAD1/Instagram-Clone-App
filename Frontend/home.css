@@ -135,6 +135,14 @@ body {
   justify-content: center;
   margin-top: 50px;
 }
+.main-explore {
+  width: 100%;
+  padding: 30px 0;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-left: 150px;
+}
 .wrapper {
   width: 70%;
   max-width: 1000px;
@@ -1002,8 +1010,8 @@ option[value="2"] {
   height: 50px;
 }
 .comment-popup {
-  margin-top: 280px;
-  margin-left: 800px;
+  top: 50%;
+  left: 70%;
   transform: translate(-80%, -50%) scale(0);
   transition: 200ms step-end;
   z-index: 100;
