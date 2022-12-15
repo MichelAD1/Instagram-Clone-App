@@ -379,14 +379,25 @@ let signUp = () => {
       data: args,
     })
       .then((res) => {
-        let resp = res["data"];
-        localStorage.setItem("Token", resp["authorisation"]);
+        let resp = res.data.authorisation.token;
+        localStorage.setItem("Token", "Bearer " + resp);
+        axios.defaults.headers.common["Authorization"] = "Bearer" + resp;
         window.location.href = "../Frontend/home.html";
       })
       .catch((err) => console.error(err.response.data));
   }
 };
-let logOut = () => {};
+let logOut = () => {
+  axios
+    .get("http://127.0.0.1:8000/api/v0.1/users/logout", {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((response) => {
+      localStorage.removeItem("Token");
+      window.location.href = "../Frontend/signin.html";
+    })
+    .catch((error) => console.log(error));
+};
 let signIn = () => {
   let username = document.getElementById("username_form").value;
   let msg = document.querySelector(".empty-fields");
@@ -407,11 +418,12 @@ let signIn = () => {
       .then((res) => {
         let resp = res["data"];
         if (resp["User"] === "Not Found") {
-          console.log(resp["User"]);
           msg.style.display = "block";
           msg.innerHTML = "Incorrect username or password";
         } else {
-          localStorage.setItem("Token", resp["authorisation"]);
+          resp = res.data.authorisation.token;
+          localStorage.setItem("Token", "Bearer " + resp);
+          axios.defaults.headers.common["Authorization"] = "Bearer" + resp;
           window.location.href = "../Frontend/home.html";
         }
       })

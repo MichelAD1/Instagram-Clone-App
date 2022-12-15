@@ -45,7 +45,6 @@
           <img id="acc_icon" src="logos/account.png" class="icon" alt="" />
           <img
             data-logout-target="#logout_pop"
-            onclick="logOut()"
             id="logout_icon"
             src="logos/exit.png"
             class="icon"
@@ -65,7 +64,12 @@
       <div class="wrapper">
         <div class="left-col">
           <div id="logout_pop" class="logout-popup">
-            <button data-logout-button class="delete-btn" id="logout_btn">
+            <button
+              onclick="logOut()"
+              data-logout-button
+              class="delete-btn"
+              id="logout_btn"
+            >
               Log out
             </button>
             <button data-close-button class="x-btn">&times;</button>
@@ -114,7 +118,7 @@
         </div>
       </div>
     </div>
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="functions.js" type="text/javascript"></script>
   </body>
 </html>
