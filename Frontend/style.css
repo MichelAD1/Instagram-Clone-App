@@ -185,18 +185,8 @@ body {
   cursor: pointer;
 }
 .back-button {
-  position: absolute;
-  width: 80px;
-  margin-top: -230px;
-  margin-left: -30px;
-  background: black;
-  color: white;
-  padding: 1rem;
-  border-radius: 100px;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  transition: background 0.5s;
+  align-self: center;
+  width: 100px;
 }
 
 .back-button:hover {

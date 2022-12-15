@@ -111,7 +111,6 @@ let splashScreen = () => {
     window.location.href = "../Frontend/signin.html";
   }, 2300);
 };
-
 let goToEdit = () => {
   window.location.href = "../Frontend/editprofile.html";
 };
@@ -193,7 +192,6 @@ let changeThemePage = () => {
   }
   document.body.classList.toggle("dark-theme");
 };
-
 let goToAccount = () => {
   window.location.href = "../Frontend/account.html";
 };
@@ -201,6 +199,9 @@ let goToAdd = () => {
   window.location.href = "../Frontend/addPostStory.html";
 };
 let loadHome = () => {
+  if (localStorage.getItem("Token") == null) {
+    window.location.href = "../Frontend/signin.html";
+  }
   let dark = localStorage.getItem("Dark");
   if (dark === "on") {
     changeThemePage();
@@ -225,6 +226,9 @@ let loadHome = () => {
   title.innerHTML = "Instagram";
 };
 let loadAccount = () => {
+  if (localStorage.getItem("Token") == null) {
+    window.location.href = "../Frontend/signin.html";
+  }
   let dark = localStorage.getItem("Dark");
   if (dark === "on") {
     changeThemePage();
@@ -249,6 +253,9 @@ let loadAccount = () => {
   title.innerHTML = "My Account";
 };
 let loadMessenger = () => {
+  if (localStorage.getItem("Token") == null) {
+    window.location.href = "../Frontend/signin.html";
+  }
   let dark = localStorage.getItem("Dark");
   if (dark === "on") {
     changeThemePage();
@@ -273,6 +280,9 @@ let loadMessenger = () => {
   title.innerHTML = "Chat - Inbox";
 };
 let loadExplore = () => {
+  if (localStorage.getItem("Token") == null) {
+    window.location.href = "../Frontend/signin.html";
+  }
   let dark = localStorage.getItem("Dark");
   if (dark === "on") {
     changeThemePage();
@@ -297,6 +307,9 @@ let loadExplore = () => {
   title.innerHTML = "Instagram";
 };
 let loadAdd = () => {
+  if (localStorage.getItem("Token") == null) {
+    window.location.href = "../Frontend/signin.html";
+  }
   let dark = localStorage.getItem("Dark");
   if (dark === "on") {
     changeThemePage();
@@ -320,7 +333,6 @@ let loadAdd = () => {
   let title = document.getElementById("title");
   title.innerHTML = "Create Post/Story";
 };
-
 let search = () => {
   let search = document.getElementById("search_icon").src;
   let name = search.split("/").pop();
@@ -339,7 +351,6 @@ let search = () => {
     searchh.style.display = "none";
   }
 };
-
 let signUp = () => {
   let username = document.getElementById("username_form").value;
   let fullname = document.getElementById("fullname_form").value;
