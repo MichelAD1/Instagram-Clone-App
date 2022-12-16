@@ -61,4 +61,12 @@ class PostController extends Controller
         ]);
         
     }
+    function getSearchPosts($username){
+        $user = User::where("username", "LIKE", $username)->get();
+        $posts = post::where("posted_by", $user->pluck('id'))->get();
+        return response()->json([
+            "Post" => $posts
+        ]);
+        
+    }
 }

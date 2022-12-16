@@ -16,12 +16,14 @@ Route::group(["prefix" => "v0.1"], function() {
         Route::get("get",[UserController::class,"getUser"]);
         Route::get("getpostedby/{id}",[UserController::class,"getPostedBy"]);
         Route::post("update",[UserController::class,"update"]);
+        Route::get("getuser/{username}",[UserController::class,"getByUsername"]);
     });
     Route::group(["prefix" => "posts"], function() {
         Route::post("add",[PostController::class,"sharePost"]);
         Route::get("getmyposts",[PostController::class,"getUserPosts"]);
         Route::get("getallposts",[PostController::class,"getAllPosts"]);
         Route::get("getpost/{id}",[PostController::class,"getPost"]);
+        Route::get("getsearch/{username}",[PostController::class,"getSearchPosts"]);
         Route::get("delete/{id}",[PostController::class,"removePost"]);
     });
     Route::group(["prefix" => "likes"], function() {

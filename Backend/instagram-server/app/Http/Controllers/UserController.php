@@ -14,6 +14,20 @@ class UserController extends Controller
     {
         $this->middleware('auth:api');
     }
+    function getByUsername($username){
+        $user = User::where("username", "LIKE", $username)->exists();
+        if($user){
+            $user = User::where("username", "LIKE", $username)->get();
+            return response()->json([
+                "User"=>$user
+            ]); 
+        }else{
+            return response()->json([
+                "User"=>$user
+            ]); 
+        }
+        
+    }
     function getUser(){
         $user = Auth::user();
         return response()->json([
