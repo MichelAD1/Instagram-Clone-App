@@ -44,7 +44,7 @@
           <img id="explore_icon" src="logos/explore.png" class="icon" alt="" />
           <img id="acc_icon" src="logos/account.png" class="icon" alt="" />
           <img
-            data-logout-target="#logout_pop"
+            onclick="openLogoutPopup()"
             id="logout_icon"
             src="logos/exit.png"
             class="icon"
@@ -60,19 +60,19 @@
         </div>
       </div>
     </nav>
-    <div class="main-explore">
+    <div class="main-home">
       <div class="wrapper">
         <div class="left-col">
           <div id="logout_pop" class="logout-popup">
             <button
+              onclick="logOut()"
               data-logout-button
               class="delete-btn"
-              onclick="logOut()"
               id="logout_btn"
             >
               Log out
             </button>
-            <button data-close-button class="x-btn">&times;</button>
+            <button onclick="closeLogoutPopup()" class="x-btn">&times;</button>
           </div>
           <div id="delete_pop" class="delete-popup">
             <button data-delete-button class="delete-btn" id="delete_btn">

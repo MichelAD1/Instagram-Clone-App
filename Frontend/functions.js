@@ -206,7 +206,14 @@ let getProfileMain = () => {
     })
     .catch((error) => console.log(error));
 };
-
+let closeLogoutPopup = () => {
+  let pop = document.getElementById("logout_pop");
+  closeLogout(pop);
+};
+let openLogoutPopup = () => {
+  let pop = document.getElementById("logout_pop");
+  displayLogout(pop);
+};
 let closeDeletePopup = () => {
   let pop = document.getElementById("delete_pop");
   closeOption(pop);

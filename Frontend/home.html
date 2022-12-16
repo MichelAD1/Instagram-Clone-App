@@ -44,7 +44,7 @@
           <img id="explore_icon" src="logos/explore.png" class="icon" alt="" />
           <img id="acc_icon" src="logos/account.png" class="icon" alt="" />
           <img
-            data-logout-target="#logout_pop"
+            onclick="openLogoutPopup()"
             id="logout_icon"
             src="logos/exit.png"
             class="icon"
@@ -73,7 +73,7 @@
             >
               Log out
             </button>
-            <button data-close-button class="x-btn">&times;</button>
+            <button onclick="closeLogoutPopup()" class="x-btn">&times;</button>
           </div>
           <div id="story_pop" class="story-popup">
             <img src="logos/cover 1.png" alt="" />

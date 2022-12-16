@@ -579,8 +579,8 @@ body {
   margin-left: 10px;
 }
 .profile-pic-comments img {
-  width: 75%;
-  height: 75%;
+  width: 60%;
+  height: 60%;
   object-fit: cover;
   border-radius: 50%;
 }
