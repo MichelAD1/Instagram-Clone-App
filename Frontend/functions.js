@@ -223,11 +223,20 @@ let getProfileUser = (username) => {
           headers: { Authorization: localStorage.getItem("Token") },
         })
         .then((res_posts) => {
-          let resp_posts = res_posts["data"];
-          let length_posts = resp_posts["Post"].length;
-          let div = document.createElement("div");
-          div.setAttribute("class", "account-card");
-          div.innerHTML = `<div class="card-header">
+          axios
+            .get(
+              `http://127.0.0.1:8000/api/v0.1/follows/check/${resp["User"][0]["id"]}`,
+              {
+                headers: { Authorization: localStorage.getItem("Token") },
+              }
+            )
+            .then((res_check) => {
+              let button_follow = res_check["data"]["Follow"];
+              let resp_posts = res_posts["data"];
+              let length_posts = resp_posts["Post"].length;
+              let div = document.createElement("div");
+              div.setAttribute("class", "account-card");
+              div.innerHTML = `<div class="card-header">
       <div class="pic">
         <img src="logos/${profile_picture}" alt="" />
       </div>
@@ -236,8 +245,8 @@ let getProfileUser = (username) => {
       <div class="desc">
         <p>${bio}</p>
       </div>
-      <a onclick="message()" class="follow-btn">Follow</a>
-      <a onclick="follow()" class="msg-btn">Message</a>
+      <a onclick="follow(${resp["User"][0]["id"]})" class="follow-btn">${button_follow}</a>
+      <a onclick="message()" class="msg-btn">Message</a>
     </div>
     <div class="card-footer">
       <div class="numbers">
@@ -257,9 +266,21 @@ let getProfileUser = (username) => {
         </div>
       </div>
     </div>`;
-          document.getElementById("profile").appendChild(div);
+              document.getElementById("profile").appendChild(div);
+            })
+            .catch((error) => console.log(error));
         })
         .catch((error) => console.log(error));
+    })
+    .catch((error) => console.log(error));
+};
+let follow = (user_id) => {
+  axios
+    .get(`http://127.0.0.1:8000/api/v0.1/follows/addremove/${user_id}`, {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((response) => {
+      window.location.href = "../Frontend/account.html";
     })
     .catch((error) => console.log(error));
 };
@@ -362,7 +383,6 @@ let openDeletePopup = () => {
   let pop = document.getElementById("delete_pop");
   displayOption(pop);
 };
-
 let deletePost = (post_id) => {
   axios
     .get(`http://127.0.0.1:8000/api/v0.1/posts/delete/${post_id}`, {
