@@ -172,20 +172,27 @@ let getProfileHome = () => {
     })
     .catch((error) => console.log(error));
 };
-let getProfileMain = () => {
+let getProfileUser = (username) => {
   axios
-    .get("http://127.0.0.1:8000/api/v0.1/users/get", {
+    .get(`http://127.0.0.1:8000/api/v0.1/users/getuser/${username}`, {
       headers: { Authorization: localStorage.getItem("Token") },
     })
     .then((res) => {
       let resp = res["data"];
-      let username = resp["User"]["username"];
-      let fullname = resp["User"]["full_name"];
-      let bio = resp["User"]["bio"];
-      let profile_picture = resp["User"]["profile_picture"];
-      let div = document.createElement("div");
-      div.setAttribute("class", "account-card");
-      div.innerHTML = `<div class="card-header">
+      let username = resp["User"][0]["username"];
+      let fullname = resp["User"][0]["full_name"];
+      let bio = resp["User"][0]["bio"];
+      let profile_picture = resp["User"][0]["profile_picture"];
+      axios
+        .get(`http://127.0.0.1:8000/api/v0.1/posts/getsearch/${username}`, {
+          headers: { Authorization: localStorage.getItem("Token") },
+        })
+        .then((res_posts) => {
+          let resp_posts = res_posts["data"];
+          let length_posts = resp_posts["Post"].length;
+          let div = document.createElement("div");
+          div.setAttribute("class", "account-card");
+          div.innerHTML = `<div class="card-header">
       <div class="pic">
         <img src="logos/${profile_picture}" alt="" />
       </div>
@@ -194,12 +201,13 @@ let getProfileMain = () => {
       <div class="desc">
         <p>${bio}</p>
       </div>
-      <a onclick="goToEdit()" class="follow-btn">Edit Profile</a>
+      <a onclick="message()" class="follow-btn">Follow</a>
+      <a onclick="follow()" class="msg-btn">Message</a>
     </div>
     <div class="card-footer">
       <div class="numbers">
         <div class="item">
-          <span>1200</span>
+          <span>${length_posts}</span>
           Posts
         </div>
         <div class="border"></div>
@@ -214,7 +222,64 @@ let getProfileMain = () => {
         </div>
       </div>
     </div>`;
-      document.getElementById("profile").appendChild(div);
+          document.getElementById("profile").appendChild(div);
+        })
+        .catch((error) => console.log(error));
+    })
+    .catch((error) => console.log(error));
+};
+let getProfileMain = () => {
+  axios
+    .get("http://127.0.0.1:8000/api/v0.1/users/get", {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res) => {
+      let resp = res["data"];
+      let username = resp["User"]["username"];
+      let fullname = resp["User"]["full_name"];
+      let bio = resp["User"]["bio"];
+      let profile_picture = resp["User"]["profile_picture"];
+      axios
+        .get("http://127.0.0.1:8000/api/v0.1/posts/getmyposts", {
+          headers: { Authorization: localStorage.getItem("Token") },
+        })
+        .then((res_posts) => {
+          let resp_posts = res_posts["data"];
+          let length_posts = resp_posts["Post"].length;
+          let div = document.createElement("div");
+          div.setAttribute("class", "account-card");
+          div.innerHTML = `<div class="card-header">
+      <div class="pic">
+        <img src="logos/${profile_picture}" alt="" />
+      </div>
+      <div class="username-profile">${username}</div>
+      <div class="name">${fullname}</div>
+      <div class="desc">
+        <p>${bio}</p>
+      </div>
+      <a onclick="goToEdit()" class="follow-btn">Edit Profile</a>
+    </div>
+    <div class="card-footer">
+      <div class="numbers">
+        <div class="item">
+          <span>${length_posts}</span>
+          Posts
+        </div>
+        <div class="border"></div>
+        <div class="item">
+          <span>127</span>
+          Following
+        </div>
+        <div class="border"></div>
+        <div class="item">
+          <span>120K</span>
+          Followers
+        </div>
+      </div>
+    </div>`;
+          document.getElementById("profile").appendChild(div);
+        })
+        .catch((error) => console.log(error));
     })
     .catch((error) => console.log(error));
 };
@@ -238,6 +303,7 @@ let openDeletePopup = () => {
   let pop = document.getElementById("delete_pop");
   displayOption(pop);
 };
+
 let deletePost = (post_id) => {
   axios
     .get(`http://127.0.0.1:8000/api/v0.1/posts/delete/${post_id}`, {
@@ -346,6 +412,121 @@ let openMyPopup = (post_id) => {
               .then((res_user) => {
                 let resp_user = res_user["data"];
                 console.log(resp_user);
+                let div = document.createElement("div");
+                div.setAttribute("class", "comments");
+                div.innerHTML = `<div class="display-comment-info">
+                  <div class="profile-pic-chatting">
+                    <img id="post_comment_img_popup" src="logos/${resp_user["User"]["profile_picture"]}" alt="" />
+                  </div>
+                  <p
+                    id="post_comment_name_popup"
+                    class="username-comment-display"
+                  >${resp_user["User"]["username"]}</p>
+                  <p
+                    id="post_comment_desc_popup"
+                    class="desc-comment-display"
+                  >${comment["content"]}</p>
+                  <p
+                    id="post_comment_date_popup"
+                    class="date-time-comment"
+                  >${parsedDate}</p>
+                </div>`;
+                document.getElementById("comments-section").appendChild(div);
+              })
+              .catch((error) => console.log(error));
+          }
+        })
+        .catch((error) => console.log(error));
+
+      let likes = document.getElementById("post_likes_popup");
+      let caption = document.getElementById("post_acc_caption_popup");
+      likes.innerHTML = post["count_likes"] + " likes";
+      caption.innerHTML = post["caption"];
+      img.src = `logos/${post["post_image"]}`;
+      displayComment(pop);
+    })
+    .catch((error) => console.log(error));
+};
+let openUserPopup = (post_id, username) => {
+  let post_btn = document.getElementById("post_cmnt");
+  post_btn.setAttribute("onclick", `addComment(${post_id})`);
+  let like = document.getElementById("like-section");
+  like.innerHTML = `<img
+            
+            id="${post_id}"
+            src=""
+            class="icon"
+            alt=""
+          />`;
+  axios
+    .get(`http://127.0.0.1:8000/api/v0.1/posts/getpost/${post_id}`, {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res) => {
+      let resp = res["data"];
+      let post = resp["Post"];
+      let pop = document.getElementById("comment_pop");
+      let img = document.getElementById("post_image_popup");
+      axios
+        .get(`http://127.0.0.1:8000/api/v0.1/users/getuser/${username}`, {
+          headers: { Authorization: localStorage.getItem("Token") },
+        })
+        .then((res_user) => {
+          let resp_user = res_user["data"];
+          let user_img = document.getElementById("post_acc_img_popup");
+          let user_name = document.getElementById("post_acc_name_popup");
+          user_img.src = "logos/" + resp_user["User"][0]["profile_picture"];
+          user_name.innerHTML = resp_user["User"][0]["username"];
+        })
+        .catch((error) => console.log(error));
+      axios
+        .get(`http://127.0.0.1:8000/api/v0.1/likes/get/${post_id}`, {
+          headers: { Authorization: localStorage.getItem("Token") },
+        })
+        .then((res_like) => {
+          let like = document.getElementById("like-section");
+          let resp_like = res_like["data"];
+          if (resp_like["Like"]) {
+            like.innerHTML = `<img
+            onclick=likeOutPost(${post_id})
+            id="${post_id}"
+            src="logos/likefill.png"
+            class="icon"
+            alt=""
+          />`;
+          } else {
+            like.innerHTML = `<img
+            onclick=likeOutPost(${post_id})
+            id="${post_id}"
+            src="logos/like.png"
+            class="icon"
+            alt=""
+          />`;
+          }
+        })
+        .catch((error) => console.log(error));
+      axios
+        .get(`http://127.0.0.1:8000/api/v0.1/comments/get/${post_id}`, {
+          headers: { Authorization: localStorage.getItem("Token") },
+        })
+        .then((res_com) => {
+          let resp_com = res_com["data"];
+          let length_com = resp_com["Comment"].length;
+          for (let i = 0; i < length_com; i++) {
+            let comment = resp_com["Comment"][i];
+            const date = comment["created_at"];
+            const parsedDate = date.split("T")[0];
+            let commented_by = comment["commented_by"];
+
+            axios
+              .get(
+                `http://127.0.0.1:8000/api/v0.1/users/getpostedby/${commented_by}`,
+                {
+                  headers: { Authorization: localStorage.getItem("Token") },
+                }
+              )
+              .then((res_user) => {
+                let resp_user = res_user["data"];
                 let div = document.createElement("div");
                 div.setAttribute("class", "comments");
                 div.innerHTML = `<div class="display-comment-info">
@@ -517,6 +698,28 @@ let getPostsMain = () => {
     })
     .catch((error) => console.log(error));
 };
+let getPostsUser = (username) => {
+  axios
+    .get(`http://127.0.0.1:8000/api/v0.1/posts/getsearch/${username}`, {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res) => {
+      let resp = res["data"];
+      let length_posts = resp["Post"].length;
+      for (let i = 0; i < length_posts; i++) {
+        let post = resp["Post"][i];
+        let div = document.createElement("div");
+        div.setAttribute("class", "post-display");
+        div.innerHTML = `<img
+        onclick="openUserPopup(${post["id"]},'${username}')"
+          src="logos/${post["post_image"]}"
+          class="profile-post-size"
+        />`;
+        document.getElementById("profile-posts").appendChild(div);
+      }
+    })
+    .catch((error) => console.log(error));
+};
 let loadHome = () => {
   if (localStorage.getItem("Token") == null) {
     window.location.href = "../Frontend/signin.html";
@@ -574,6 +777,43 @@ let loadAccount = () => {
   title.innerHTML = "My Account";
   getProfileMain();
   getPostsMain();
+};
+let loadUser = () => {
+  let dark = localStorage.getItem("Dark");
+  if (dark === "on") {
+    changeThemePage();
+  }
+  document.getElementById("explore_icon").onclick = function () {
+    window.location.href = "../Frontend/explore.html";
+  };
+  document.getElementById("add_icon").onclick = function () {
+    window.location.href = "../Frontend/addPostStory.html";
+  };
+  document.getElementById("messenger_icon").onclick = function () {
+    window.location.href = "../Frontend/messenger.html";
+  };
+  document.getElementById("home_icon").onclick = function () {
+    window.location.href = "../Frontend/home.html";
+  };
+  document.getElementById("acc_icon").onclick = function () {
+    window.location.href = "../Frontend/account.html";
+  };
+  let searchh = document.querySelector(".search");
+  searchh.style.display = "none";
+  let username = localStorage.getItem("Search");
+  if (username === "false") {
+    let title = document.getElementById("title");
+    title.innerHTML = "Profile not found";
+    let result = document.querySelector(".no-result");
+    result.style.display = "block";
+    let h = document.querySelector(".post-header");
+    h.style.display = "none";
+    let b = document.querySelector(".post-border");
+    b.style.display = "none";
+  } else {
+    getProfileUser(username);
+    getPostsUser(username);
+  }
 };
 let loadMessenger = () => {
   if (localStorage.getItem("Token") == null) {
@@ -686,6 +926,31 @@ let search = () => {
     search.style.display = "block";
     let searchh = document.querySelector(".search");
     searchh.style.display = "block";
+    let search_input = document.getElementById("search");
+    search_input.addEventListener("keyup", (e) => {
+      if (e.keyCode === 13) {
+        let user = search_input.value;
+        axios
+          .get(`http://127.0.0.1:8000/api/v0.1/users/getuser/${user}`, {
+            headers: { Authorization: localStorage.getItem("Token") },
+          })
+          .then((res_search) => {
+            let resp_search = res_search["data"];
+            if (resp_search["User"] === false) {
+              localStorage.setItem("Search", resp_search["User"]);
+            } else {
+              localStorage.setItem(
+                "Search",
+                resp_search["User"][0]["username"]
+              );
+            }
+
+            window.location.href = "../Frontend/viewprofile.html";
+          })
+          .catch((error) => console.log(error));
+        search_input.value = "";
+      }
+    });
   } else {
     search.src = "logos/search.png";
     search = document.getElementById("search");

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="home.css" />
+    <link rel="icon" href="logos/instagram.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,600,0,0"
+    />
+    <title id="title">Instagram</title>
+  </head>
+  <body onload="loadUser()">
+    <nav id="nav" class="navbar">
+      <div class="nav-wrapper">
+        <div id="overlay"></div>
+        <img id="logo_icon" src="logos/logo.png" class="brand-img" alt="" />
+        <div style="display: none" class="search">
+          <input
+            id="search"
+            style="display: none"
+            placeholder="Search"
+            type="text"
+          />
+        </div>
+        <div class="nav-items">
+          <img
+            onclick="search()"
+            id="search_icon"
+            src="logos/search.png"
+            class="icon"
+            alt=""
+          />
+          <img id="home_icon" src="logos/home.png" class="icon" alt="" />
+          <img
+            id="messenger_icon"
+            src="logos/messenger.png"
+            class="icon"
+            alt=""
+          />
+          <img id="add_icon" src="logos/add.png" class="icon" alt="" />
+          <img id="explore_icon" src="logos/explore.png" class="icon" alt="" />
+          <img id="acc_icon" src="logos/account.png" class="icon" alt="" />
+          <img
+            onclick="openLogoutPopup()"
+            id="logout_icon"
+            src="logos/exit.png"
+            class="icon"
+            alt=""
+          />
+          <img
+            onclick="changeTheme()"
+            id="theme_icon"
+            src="logos/moon.png"
+            class="icon"
+            alt=""
+          />
+        </div>
+      </div>
+    </nav>
+    <div style="display: none" class="no-result">
+      No users with the given name
+    </div>
+    <div class="main-home">
+      <div class="wrapper">
+        <div class="left-col">
+          <div id="comment_popup">
+            <div id="comment_pop" class="comment-popup">
+              <img id="post_image_popup" src="" alt="" />
+              <div class="comment-section">
+                <div class="comment-account">
+                  <div class="profile-pic-comment">
+                    <img
+                      id="post_acc_img_popup"
+                      src="logos/cover 8.png"
+                      alt=""
+                    />
+                  </div>
+                  <p id="post_acc_name_popup" class="username-comment"></p>
+                </div>
+                <div class="comments-display">
+                  <div id="comments-section"></div>
+                  <div class="add-comment-post">
+                    <input
+                      id="comment"
+                      onclick="displaySend()"
+                      type="text"
+                      placeholder="Add a comment..."
+                    />
+                    <button
+                      id="post_cmnt"
+                      style="display: none"
+                      class="send-message-btn"
+                    >
+                      post
+                    </button>
+                  </div>
+                  <div class="likes-section">
+                    <p id="post_acc_caption_popup" class="caption-comment"></p>
+                    <div id="like-section" class="post-like-wrapper">
+                      <img id="like_icon" src="" class="icon" alt="" />
+                    </div>
+                    <p id="post_likes_popup" class="likes-post"></p>
+                  </div>
+                </div>
+              </div>
+
+              <button onclick="closeMyPopup()" class="x-comment-btn">
+                &times;
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="profile" class="profile-container"></div>
+    <div class="post-header">
+      <h3>Posts</h3>
+    </div>
+    <div class="post-border"></div>
+    <div id="profile-posts" class="profile-posts"></div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="functions.js" type="text/javascript"></script>
+  </body>
+</html>

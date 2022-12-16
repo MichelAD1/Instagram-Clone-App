@@ -284,7 +284,13 @@ body {
   width: 100%;
   padding: 20px;
 }
-
+.no-result {
+  position: absolute;
+  top: 50%;
+  right: 34%;
+  font-size: 40px;
+  font-weight: 200;
+}
 .likes {
   font-weight: bold;
   color: var(--prim-names-color);
@@ -933,6 +939,24 @@ option[value="2"] {
 }
 
 .follow-btn:hover {
+  cursor: pointer;
+  background: #e66767;
+  color: #f2f2f2;
+}
+.msg-btn {
+  position: absolute;
+  width: 202px;
+  padding: 12px 60px;
+  text-decoration: none;
+  color: #e66767;
+  border: 2px solid #e66767;
+  border-radius: 6px;
+  margin-top: -170px;
+  margin-left: 706px;
+  transition: 0.3s linear;
+}
+
+.msg-btn:hover {
   cursor: pointer;
   background: #e66767;
   color: #f2f2f2;
