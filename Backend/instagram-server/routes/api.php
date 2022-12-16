@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\LikeController;
 
 Route::group(["prefix" => "v0.1"], function() {
     Route::group(["prefix" => "users"], function() {
@@ -20,6 +21,10 @@ Route::group(["prefix" => "v0.1"], function() {
         Route::get("getmyposts",[PostController::class,"getUserPosts"]);
         Route::get("getallposts",[PostController::class,"getAllPosts"]);
         Route::get("getpost/{id}",[PostController::class,"getPost"]);
+    });
+    Route::group(["prefix" => "likes"], function() {
+        Route::get("like/{id}",[LikeController::class,"like"]);
+        Route::get("dislike/{id}",[LikeController::class,"dislike"]);
     });
 	
 });
