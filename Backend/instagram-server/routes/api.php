@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
 
 Route::group(["prefix" => "v0.1"], function() {
     Route::group(["prefix" => "users"], function() {
@@ -12,6 +13,9 @@ Route::group(["prefix" => "v0.1"], function() {
         Route::get("logout",[AuthController::class,"logout"]);
         Route::get("get",[UserController::class,"getUser"]);
         Route::post("update",[UserController::class,"update"]);
+    });
+    Route::group(["prefix" => "posts"], function() {
+        Route::post("add",[PostController::class,"sharePost"]);
     });
 	
 });
