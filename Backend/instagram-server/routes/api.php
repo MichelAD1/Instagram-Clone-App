@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\CommentController;
 
 Route::group(["prefix" => "v0.1"], function() {
     Route::group(["prefix" => "users"], function() {
@@ -27,6 +28,10 @@ Route::group(["prefix" => "v0.1"], function() {
         Route::get("like/{id}",[LikeController::class,"like"]);
         Route::get("dislike/{id}",[LikeController::class,"dislike"]);
         Route::get("get/{id}",[LikeController::class,"getLike"]);
+    });
+    Route::group(["prefix" => "comments"], function() {
+        Route::post("add",[CommentController::class,"addComment"]);
+        Route::get("get/{id}",[CommentController::class,"getComments"]);
     });
 	
 });

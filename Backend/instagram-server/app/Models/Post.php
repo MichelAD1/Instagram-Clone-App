@@ -9,6 +9,7 @@ class Post extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'count_likes'
+        'count_likes',
+        'count_comments'
     ];
 }
