@@ -50,6 +50,8 @@ Route::group(["prefix" => "v0.1"], function() {
         Route::post("add",[StoryController::class,"shareStory"]);
         Route::get("gethome",[StoryController::class,"followingStory"]);
         Route::get("delete/{id}",[StoryController::class,"removeStory"]);
+        Route::get("getstory/{id}",[StoryController::class,"getStory"]);
+        Route::get("gettimes",[StoryController::class,"getTime"]);
     });
 	
 });

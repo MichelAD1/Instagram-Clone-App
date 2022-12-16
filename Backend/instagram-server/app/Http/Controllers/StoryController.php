@@ -40,4 +40,18 @@ class StoryController extends Controller
             "Story"=>"Removed"
         ]);
     }
+    function getStory($id){
+        $story = story::find($id);
+        return response()->json([
+            "Story" => $story
+        ]);
+        
+    }
+    function getTime(){
+        $story = story::all();
+        return response()->json([
+            "Story" => $story->pluck('created_at')
+        ]);
+        
+    }
 }
