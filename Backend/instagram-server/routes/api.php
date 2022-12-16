@@ -16,6 +16,8 @@ Route::group(["prefix" => "v0.1"], function() {
     });
     Route::group(["prefix" => "posts"], function() {
         Route::post("add",[PostController::class,"sharePost"]);
+        Route::get("getmyposts",[PostController::class,"getUserPosts"]);
+        Route::get("getallposts",[PostController::class,"getAllPosts"]);
     });
 	
 });

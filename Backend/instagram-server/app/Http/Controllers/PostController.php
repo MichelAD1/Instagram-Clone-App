@@ -27,4 +27,19 @@ class PostController extends Controller
             ]);
         }
     }
+    function getUserPosts(){
+        $user=Auth::user();
+        $posts = post::where("posted_by", $user->id)->get();
+        return response()->json([
+            "Post" => $posts
+        ]);
+        
+    }
+    function getAllPosts(){
+        $posts = post::all();
+        return response()->json([
+            "Post" => $posts
+        ]);
+        
+    }
 }
