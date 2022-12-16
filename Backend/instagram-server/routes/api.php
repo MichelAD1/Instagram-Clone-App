@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FollowController;
 
 Route::group(["prefix" => "v0.1"], function() {
     Route::group(["prefix" => "users"], function() {
@@ -35,6 +36,11 @@ Route::group(["prefix" => "v0.1"], function() {
         Route::post("add",[CommentController::class,"addComment"]);
         Route::get("get/{id}",[CommentController::class,"getComments"]);
         Route::get("count/{id}",[CommentController::class,"getCount"]);
+    });
+    Route::group(["prefix" => "follows"], function() {
+        Route::get("addremove/{id}",[FollowController::class,"addRemove"]);
+        Route::get("countfollowing/{id}",[FollowController::class,"getCountFollowing"]);
+        Route::get("countfollower/{id}",[FollowController::class,"getCountFollower"]);
     });
 	
 });
