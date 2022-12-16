@@ -28,7 +28,13 @@ class CommentController extends Controller
     }
    }
    function getComments($post_id){
-    $comments = comment::where("commented_on",$post_id)->get();
+    $comments = comment::where("commented_on",$post_id)->orderBy('created_at', 'asc')->get();
+    return response()->json([
+        "Comment" => $comments
+    ]); 
+   }
+   function getCount($post_id){
+    $comments = comment::where("commented_on",$post_id)->count();
     return response()->json([
         "Comment" => $comments
     ]); 

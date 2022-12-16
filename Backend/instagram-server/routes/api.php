@@ -32,6 +32,7 @@ Route::group(["prefix" => "v0.1"], function() {
     Route::group(["prefix" => "comments"], function() {
         Route::post("add",[CommentController::class,"addComment"]);
         Route::get("get/{id}",[CommentController::class,"getComments"]);
+        Route::get("count/{id}",[CommentController::class,"getCount"]);
     });
 	
 });
