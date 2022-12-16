@@ -826,6 +826,7 @@ let loadHome = () => {
   let title = document.getElementById("title");
   title.innerHTML = "Instagram";
   getProfileHome();
+  getFollowingPosts();
 };
 let loadAccount = () => {
   if (localStorage.getItem("Token") == null) {
@@ -1245,7 +1246,7 @@ let getAllPosts = () => {
               <p class="description">
                 <span>${user["username"]} </span> ${post["caption"]}
               </p>
-              <p  onclick="openAllPopup(${post["id"]})" class="view-comments">
+              <p  onclick="openAllPopup(${post["id"]},${user["id"]})" class="view-comments">
                 View all ${res_count["data"]["Comment"]} comments
               </p>
               <p class="post-time">${parsedDate}</p>
@@ -1284,7 +1285,130 @@ let getAllPosts = () => {
               <p class="description">
                 <span>${user["username"]} </span> ${post["caption"]}
               </p>
-              <p  onclick="openAllPopup(${post["id"]})" class="view-comments">
+              <p  onclick="openAllPopup(${post["id"]},${user["id"]})" class="view-comments">
+                View all ${res_count["data"]["Comment"]} comments
+              </p>
+              <p class="post-time">${parsedDate}</p>
+            </div>
+            `;
+                      document.getElementById("all-posts").appendChild(div);
+                    }
+                  })
+                  .catch((error) => console.log(error));
+              })
+              .catch((error) => console.log(error));
+          })
+          .catch((error) => console.log(error));
+      }
+    })
+    .catch((error) => console.log(error));
+};
+let getFollowingPosts = () => {
+  axios
+    .get("http://127.0.0.1:8000/api/v0.1/posts/gethome", {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res) => {
+      let resp = res["data"];
+      let length_posts = resp["Post"].length;
+      for (let i = 0; i < length_posts; i++) {
+        let post = resp["Post"][i];
+        const date = post["created_at"];
+        const parsedDate = date.split(" ")[0];
+        let post_id = post["posted_by"];
+        axios
+          .get(`http://127.0.0.1:8000/api/v0.1/users/getpostedby/${post_id}`, {
+            headers: { Authorization: localStorage.getItem("Token") },
+          })
+          .then((res_user) => {
+            let resp_user = res_user["data"];
+            let user = resp_user["User"];
+            axios
+              .get(`http://127.0.0.1:8000/api/v0.1/likes/get/${post["id"]}`, {
+                headers: { Authorization: localStorage.getItem("Token") },
+              })
+              .then((res_like) => {
+                axios
+                  .get(
+                    `http://127.0.0.1:8000/api/v0.1/comments/count/${post["id"]}`,
+                    {
+                      headers: { Authorization: localStorage.getItem("Token") },
+                    }
+                  )
+                  .then((res_count) => {
+                    let resp_like = res_like["data"];
+                    if (resp_like["Like"]) {
+                      let div = document.createElement("div");
+                      div.setAttribute("class", "post");
+                      div.innerHTML = `<div class="info">
+              <div class="user">
+                <div class="profile-pic">
+                  <img src="logos/${user["profile_picture"]}" alt="" />
+                </div>
+                <p class="username">${user["username"]}</p>
+              </div>
+            </div>
+            <img src="logos/${post["post_image"]}" class="post-image" alt="" />
+            <div class="post-content">
+              <div class="reaction-wrapper">
+                <img
+                  id="${post["id"]}"
+                  onclick="likeOutPost(${post["id"]})"
+                  src="logos/likefill.png"
+                  class="icon"
+                  alt=""
+                />
+                <img
+                  onclick="openAllPopup(${post["id"]},${user["id"]})"
+                  src="logos/comment.png"
+                  class="icon"
+                  alt=""
+                />
+              </div>
+              <p class="likes">${post["count_likes"]} likes</p>
+              <p class="description">
+                <span>${user["username"]} </span> ${post["caption"]}
+              </p>
+              <p  onclick="openAllPopup(${post["id"]},${user["id"]})" class="view-comments">
+                View all ${res_count["data"]["Comment"]} comments
+              </p>
+              <p class="post-time">${parsedDate}</p>
+            </div>
+            `;
+                      document.getElementById("all-posts").appendChild(div);
+                    } else {
+                      let div = document.createElement("div");
+                      div.setAttribute("class", "post");
+                      div.innerHTML = `<div class="info">
+              <div class="user">
+                <div class="profile-pic">
+                  <img src="logos/${user["profile_picture"]}" alt="" />
+                </div>
+                <p class="username">${user["username"]}</p>
+              </div>
+            </div>
+            <img src="logos/${post["post_image"]}" class="post-image" alt="" />
+            <div class="post-content">
+              <div class="reaction-wrapper">
+                <img
+                  id="${post["id"]}"
+                  onclick="likeOutPost(${post["id"]})"
+                  src="logos/like.png"
+                  class="icon"
+                  alt=""
+                />
+                <img
+                  onclick="openAllPopup(${post["id"]},${user["id"]})"
+                  src="logos/comment.png"
+                  class="icon"
+                  alt=""
+                />
+              </div>
+              <p class="likes">${post["count_likes"]} likes</p>
+              <p class="description">
+                <span>${user["username"]} </span> ${post["caption"]}
+              </p>
+              <p  onclick="openAllPopup(${post["id"]},${user["id"]})" class="view-comments">
                 View all ${res_count["data"]["Comment"]} comments
               </p>
               <p class="post-time">${parsedDate}</p>
