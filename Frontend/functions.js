@@ -174,6 +174,17 @@ let getProfileHome = () => {
 };
 let getProfileUser = (username) => {
   axios
+    .get(`http://127.0.0.1:8000/api/v0.1/users/get`, {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res_me) => {
+      let resp_me = res_me["data"];
+      if (resp_me["User"]["username"] === username) {
+        window.location.href = "../Frontend/account.html";
+      }
+    })
+    .catch((error) => console.log(error));
+  axios
     .get(`http://127.0.0.1:8000/api/v0.1/users/getuser/${username}`, {
       headers: { Authorization: localStorage.getItem("Token") },
     })
@@ -183,6 +194,30 @@ let getProfileUser = (username) => {
       let fullname = resp["User"][0]["full_name"];
       let bio = resp["User"][0]["bio"];
       let profile_picture = resp["User"][0]["profile_picture"];
+      let followers;
+      let following;
+      axios
+        .get(
+          `http://127.0.0.1:8000/api/v0.1/follows/countfollowing/${resp["User"][0]["id"]}`,
+          {
+            headers: { Authorization: localStorage.getItem("Token") },
+          }
+        )
+        .then((res_following) => {
+          following = res_following["data"]["Follow"];
+        })
+        .catch((error) => console.log(error));
+      axios
+        .get(
+          `http://127.0.0.1:8000/api/v0.1/follows/countfollower/${resp["User"][0]["id"]}`,
+          {
+            headers: { Authorization: localStorage.getItem("Token") },
+          }
+        )
+        .then((res_follower) => {
+          followers = res_follower["data"]["Follow"];
+        })
+        .catch((error) => console.log(error));
       axios
         .get(`http://127.0.0.1:8000/api/v0.1/posts/getsearch/${username}`, {
           headers: { Authorization: localStorage.getItem("Token") },
@@ -212,12 +247,12 @@ let getProfileUser = (username) => {
         </div>
         <div class="border"></div>
         <div class="item">
-          <span>127</span>
+          <span>${following}</span>
           Following
         </div>
         <div class="border"></div>
         <div class="item">
-          <span>120K</span>
+          <span>${followers}</span>
           Followers
         </div>
       </div>
@@ -239,6 +274,30 @@ let getProfileMain = () => {
       let fullname = resp["User"]["full_name"];
       let bio = resp["User"]["bio"];
       let profile_picture = resp["User"]["profile_picture"];
+      let followers;
+      let following;
+      axios
+        .get(
+          `http://127.0.0.1:8000/api/v0.1/follows/countfollowing/${resp["User"]["id"]}`,
+          {
+            headers: { Authorization: localStorage.getItem("Token") },
+          }
+        )
+        .then((res_following) => {
+          following = res_following["data"]["Follow"];
+        })
+        .catch((error) => console.log(error));
+      axios
+        .get(
+          `http://127.0.0.1:8000/api/v0.1/follows/countfollower/${resp["User"]["id"]}`,
+          {
+            headers: { Authorization: localStorage.getItem("Token") },
+          }
+        )
+        .then((res_follower) => {
+          followers = res_follower["data"]["Follow"];
+        })
+        .catch((error) => console.log(error));
       axios
         .get("http://127.0.0.1:8000/api/v0.1/posts/getmyposts", {
           headers: { Authorization: localStorage.getItem("Token") },
@@ -267,12 +326,12 @@ let getProfileMain = () => {
         </div>
         <div class="border"></div>
         <div class="item">
-          <span>127</span>
+          <span>${following}</span>
           Following
         </div>
         <div class="border"></div>
         <div class="item">
-          <span>120K</span>
+          <span>${followers}</span>
           Followers
         </div>
       </div>
