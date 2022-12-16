@@ -23,4 +23,21 @@ class StoryController extends Controller
             ]);
         }
     }
+    function followingStory(){
+        $user = Auth::user();
+        $stories = DB::table("stories")
+            ->join("follows", "user_followed_id", "=", "stories.posted_by")
+            ->where("user_following_id", $user["id"])
+            ->select("stories.*")
+            ->get();
+        return response()->json([
+            "Story"=>$stories
+        ]);
+    }
+    function removeStory($story_id){
+        $story = story::where("id", $story_id)->delete();
+        return response()->json([
+            "Story"=>"Removed"
+        ]);
+    }
 }
