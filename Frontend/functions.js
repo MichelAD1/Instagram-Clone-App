@@ -1224,8 +1224,8 @@ let addPostStory = () => {
   let type = document.getElementById("type").value;
   let caption = document.getElementById("caption_form").value;
   let image = document.getElementById("image_form").files[0].name;
-  let args = new FormData();
   if (type === "post") {
+    let args = new FormData();
     args.append("caption", caption);
     args.append("post_image", image);
     axios
@@ -1237,8 +1237,13 @@ let addPostStory = () => {
       })
       .catch((err) => console.error(err.response.data));
   } else {
-    args.append("caption", caption);
-    args.append("post_image", image);
+    let args = new FormData();
+    if (caption === "") {
+      args.append("caption", "empty");
+    } else {
+      args.append("caption", caption);
+    }
+    args.append("story_image", image);
     axios
       .post("http://127.0.0.1:8000/api/v0.1/stories/add", args, {
         headers: { Authorization: localStorage.getItem("Token") },
