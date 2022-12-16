@@ -37,5 +37,12 @@ class LikeController extends Controller
         ]); 
         
     }
+    function getLike($post_id){
+        $user=Auth::user();
+        $like = like::where("user_id", $user->id)->where("post_id",$post_id)->exists();
+        return response()->json([
+            "Like" => $like
+        ]); 
+    }
     
 }

@@ -25,6 +25,7 @@ Route::group(["prefix" => "v0.1"], function() {
     Route::group(["prefix" => "likes"], function() {
         Route::get("like/{id}",[LikeController::class,"like"]);
         Route::get("dislike/{id}",[LikeController::class,"dislike"]);
+        Route::get("get/{id}",[LikeController::class,"getLike"]);
     });
 	
 });
