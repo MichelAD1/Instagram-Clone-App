@@ -286,6 +286,7 @@ body {
 }
 .no-result {
   position: absolute;
+  color: var(--prim-names-color);
   top: 50%;
   right: 34%;
   font-size: 40px;

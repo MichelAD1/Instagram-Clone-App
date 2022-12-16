@@ -75,6 +75,12 @@
             </button>
             <button onclick="closeLogoutPopup()" class="x-btn">&times;</button>
           </div>
+          <div id="story_pop" class="story-popup">
+            <img src="logos/cover 1.png" alt="" />
+            <button onclick="closeStoryPopup()" class="x-story-btn">
+              &times;
+            </button>
+          </div>
 
           <div class="status-wrapper">
             <div class="status-card">
@@ -90,7 +96,7 @@
             <div class="status-card">
               <div class="profile-pic">
                 <img
-                  data-story-target="#story_pop"
+                  onclick="openStoryPopup()"
                   src="logos/cover 1.png"
                   alt=""
                 />
@@ -100,7 +106,7 @@
             <div class="status-card">
               <div class="profile-pic">
                 <img
-                  data-story-target="#story_pop"
+                  onclick="openStoryPopup()"
                   src="logos/cover 2.png"
                   alt=""
                 />
@@ -108,7 +114,7 @@
               <p class="username">user_name_2ada</p>
             </div>
             <div class="status-card">
-              <div data-story-target="#story_pop" class="profile-pic">
+              <div onclick="openStoryPopup()" class="profile-pic">
                 <img src="logos/cover 3.png" alt="" />
               </div>
               <p class="username">michelabidaoudddad</p>

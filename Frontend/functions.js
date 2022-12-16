@@ -367,6 +367,14 @@ let closeLogoutPopup = () => {
   let pop = document.getElementById("logout_pop");
   closeLogout(pop);
 };
+let openStoryPopup = () => {
+  let pop = document.getElementById("story_pop");
+  displayStatus(pop);
+};
+let closeStoryPopup = () => {
+  let pop = document.getElementById("story_pop");
+  closeStatus(pop);
+};
 let openLogoutPopup = () => {
   let pop = document.getElementById("logout_pop");
   displayLogout(pop);
