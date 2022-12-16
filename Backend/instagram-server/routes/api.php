@@ -12,6 +12,7 @@ Route::group(["prefix" => "v0.1"], function() {
         Route::post("signup",[AuthController::class,"register"]);
         Route::get("logout",[AuthController::class,"logout"]);
         Route::get("get",[UserController::class,"getUser"]);
+        Route::get("getpostedby/{id}",[UserController::class,"getPostedBy"]);
         Route::post("update",[UserController::class,"update"]);
     });
     Route::group(["prefix" => "posts"], function() {

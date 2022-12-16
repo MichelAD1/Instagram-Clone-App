@@ -20,6 +20,12 @@ class UserController extends Controller
             'User' => $user,
         ]);
     }
+    function getPostedBy($id){
+        $user = user::find($id);
+        return response()->json([
+            'User' => $user,
+        ]);
+    }
     function update(Request $request){
         $user = Auth::user();   
         if($request->has('username')){
