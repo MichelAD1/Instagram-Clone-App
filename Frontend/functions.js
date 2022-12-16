@@ -763,6 +763,28 @@ let openAllPopup = (post_id, user_id) => {
     })
     .catch((error) => console.log(error));
 };
+let openStoriesPopup = (story_id) => {
+  axios
+    .get(`http://127.0.0.1:8000/api/v0.1/stories/getstory/${story_id}`, {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res) => {
+      let pop = document.getElementById("story_pop");
+      let resp = res["data"];
+      let post = resp["Story"];
+      let img = document.getElementById("story_image_popup");
+      let caption = document.getElementById("story_caption_popup");
+      if (post["caption"] === "empty") {
+        caption.innerHTML = "";
+      } else {
+        caption.innerHTML = post["caption"];
+      }
+
+      img.src = `logos/${post["story_image"]}`;
+      displayStatus(pop);
+    })
+    .catch((error) => console.log(error));
+};
 let getPostsMain = () => {
   axios
     .get("http://127.0.0.1:8000/api/v0.1/posts/getmyposts", {
@@ -835,6 +857,7 @@ let loadHome = () => {
   title.innerHTML = "Instagram";
   getProfileHome();
   getFollowingPosts();
+  getFollowingStories();
 };
 let loadAccount = () => {
   if (localStorage.getItem("Token") == null) {
@@ -1428,6 +1451,39 @@ let getFollowingPosts = () => {
                   .catch((error) => console.log(error));
               })
               .catch((error) => console.log(error));
+          })
+          .catch((error) => console.log(error));
+      }
+    })
+    .catch((error) => console.log(error));
+};
+let getFollowingStories = () => {
+  axios
+    .get("http://127.0.0.1:8000/api/v0.1/stories/gethome", {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res) => {
+      let resp = res["data"];
+      let length_posts = resp["Story"].length;
+      for (let i = 0; i < length_posts; i++) {
+        let post = resp["Story"][i];
+        console.log(post);
+        let post_id = post["posted_by"];
+        axios
+          .get(`http://127.0.0.1:8000/api/v0.1/users/getpostedby/${post_id}`, {
+            headers: { Authorization: localStorage.getItem("Token") },
+          })
+          .then((res_user) => {
+            let resp_user = res_user["data"];
+            let user = resp_user["User"];
+            let div = document.createElement("div");
+            div.setAttribute("class", "status-card");
+            div.innerHTML = `<div onclick="openStoriesPopup(${post["id"]})" class="profile-pic">
+            <img src="logos/${post["story_image"]}" alt="" />
+          </div>
+          <p class="username">${user["username"]}</p>
+        </div>`;
+            document.getElementById("stories_section").appendChild(div);
           })
           .catch((error) => console.log(error));
       }

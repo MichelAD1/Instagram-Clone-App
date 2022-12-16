@@ -76,13 +76,14 @@
             <button onclick="closeLogoutPopup()" class="x-btn">&times;</button>
           </div>
           <div id="story_pop" class="story-popup">
-            <img src="logos/cover 1.png" alt="" />
+            <img id="story_image_popup" src="" alt="" />
+            <p id="story_caption_popup"></p>
             <button onclick="closeStoryPopup()" class="x-story-btn">
               &times;
             </button>
           </div>
 
-          <div class="status-wrapper">
+          <div id="stories_section" class="status-wrapper">
             <div class="status-card">
               <div class="add-story-pic">
                 <img
@@ -93,33 +94,8 @@
                 />
               </div>
             </div>
-            <div class="status-card">
-              <div class="profile-pic">
-                <img
-                  onclick="openStoryPopup()"
-                  src="logos/cover 1.png"
-                  alt=""
-                />
-              </div>
-              <p class="username">user_name_1</p>
-            </div>
-            <div class="status-card">
-              <div class="profile-pic">
-                <img
-                  onclick="openStoryPopup()"
-                  src="logos/cover 2.png"
-                  alt=""
-                />
-              </div>
-              <p class="username">user_name_2ada</p>
-            </div>
-            <div class="status-card">
-              <div onclick="openStoryPopup()" class="profile-pic">
-                <img src="logos/cover 3.png" alt="" />
-              </div>
-              <p class="username">michelabidaoudddad</p>
-            </div>
           </div>
+
           <div id="comment_popup">
             <div id="comment_pop" class="comment-popup">
               <img id="post_image_popup" src="" alt="" />

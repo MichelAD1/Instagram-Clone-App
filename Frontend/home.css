@@ -1124,6 +1124,14 @@ option[value="2"] {
   justify-content: center;
   position: fixed;
 }
+.story-popup p {
+  text-align: center;
+  position: absolute;
+  width: 150px;
+  top: 50%;
+  right: 80%;
+  color: white;
+}
 .story-popup > img {
   object-fit: cover;
   width: 350px;
