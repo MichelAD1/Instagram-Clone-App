@@ -40,4 +40,25 @@ class FollowController extends Controller
             "Follow" => $follower
         ]); 
        }
+       function checkIf($user_id){
+        $user=Auth::user();
+        $follow=follow::where("user_followed_id",$user_id)->where("user_following_id",$user->id)->exists();
+        if($follow){
+            return response()->json([
+                "Follow" => "Unfollow"
+            ]); 
+        }else{
+           return response()->json([
+              "Follow" => "Follow"
+           ]);  
+            
+        }
+       }
+       function getFollowing(){
+        $user=Auth::user();
+        $following = follow::where("user_following_id",$user->id)->get();
+        return response()->json([
+            "Follow" => $following
+        ]); 
+       }
 }

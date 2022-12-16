@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Like;
+use Illuminate\Support\Facades\DB;
 use App\Models\Comment;
 
 class PostController extends Controller
@@ -38,6 +39,18 @@ class PostController extends Controller
             "Post" => "Removed"
         ]);
         
+    }
+    function followingPosts(){
+        $user = Auth::user();
+
+        $posts = DB::table("posts")
+            ->join("follows", "user_followed_id", "=", "posts.posted_by")
+            ->where("user_following_id", $user["id"])
+            ->select("posts.*")
+            ->get();
+        return response()->json([
+            "Post"=>$posts
+        ]);
     }
     function getUserPosts(){
         $user=Auth::user();

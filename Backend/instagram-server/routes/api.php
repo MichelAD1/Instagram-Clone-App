@@ -26,6 +26,7 @@ Route::group(["prefix" => "v0.1"], function() {
         Route::get("getpost/{id}",[PostController::class,"getPost"]);
         Route::get("getsearch/{username}",[PostController::class,"getSearchPosts"]);
         Route::get("delete/{id}",[PostController::class,"removePost"]);
+        Route::get("gethome",[PostController::class,"followingPosts"]);
     });
     Route::group(["prefix" => "likes"], function() {
         Route::get("like/{id}",[LikeController::class,"like"]);
@@ -39,8 +40,10 @@ Route::group(["prefix" => "v0.1"], function() {
     });
     Route::group(["prefix" => "follows"], function() {
         Route::get("addremove/{id}",[FollowController::class,"addRemove"]);
+        Route::get("check/{id}",[FollowController::class,"checkIf"]);
         Route::get("countfollowing/{id}",[FollowController::class,"getCountFollowing"]);
         Route::get("countfollower/{id}",[FollowController::class,"getCountFollower"]);
+        Route::get("getfollowing",[FollowController::class,"getFollowing"]);
     });
 	
 });
