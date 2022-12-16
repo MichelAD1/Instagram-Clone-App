@@ -1209,6 +1209,14 @@ let addPostStory = () => {
   } else {
     args.append("caption", caption);
     args.append("post_image", image);
+    axios
+      .post("http://127.0.0.1:8000/api/v0.1/stories/add", args, {
+        headers: { Authorization: localStorage.getItem("Token") },
+      })
+      .then((res) => {
+        window.location.href = "../Frontend/account.html";
+      })
+      .catch((err) => console.error(err.response.data));
   }
 };
 let getAllPosts = () => {
