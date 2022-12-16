@@ -60,14 +60,25 @@ let displaySend = () => {
   let send = document.querySelector(".send-message-btn");
   send.style.display = "flex";
 };
-let likePost = () => {
-  let like = document.getElementById("like_icon").src;
+let likeOutPost = (post_id) => {
+  let like = document.getElementById(post_id).src;
   let name = like.split("/").pop();
-  like = document.getElementById("like_icon");
+  like = document.getElementById(post_id);
   if (name === "like.png") {
+    axios
+      .get(`http://127.0.0.1:8000/api/v0.1/likes/like/${post_id}`, {
+        headers: { Authorization: localStorage.getItem("Token") },
+      })
+      .then((res) => {})
+      .catch((error) => console.log(error));
     like.src = "logos/likefill.png";
-  }
-  if (name === "likefill.png") {
+  } else {
+    axios
+      .get(`http://127.0.0.1:8000/api/v0.1/likes/dislike/${post_id}`, {
+        headers: { Authorization: localStorage.getItem("Token") },
+      })
+      .then((res) => {})
+      .catch((error) => console.log(error));
     like.src = "logos/like.png";
   }
 };
@@ -227,6 +238,14 @@ let openDeletePopup = () => {
   displayOption(pop);
 };
 let openMyPopup = (post_id) => {
+  let like = document.getElementById("like-section");
+  like.innerHTML = `<img
+            
+            id="${post_id}"
+            src=""
+            class="icon"
+            alt=""
+          />`;
   axios
     .get(`http://127.0.0.1:8000/api/v0.1/posts/getpost/${post_id}`, {
       headers: { Authorization: localStorage.getItem("Token") },
@@ -248,7 +267,32 @@ let openMyPopup = (post_id) => {
           user_name.innerHTML = resp_user["User"]["username"];
         })
         .catch((error) => console.log(error));
-
+      axios
+        .get(`http://127.0.0.1:8000/api/v0.1/likes/get/${post_id}`, {
+          headers: { Authorization: localStorage.getItem("Token") },
+        })
+        .then((res_like) => {
+          let like = document.getElementById("like-section");
+          let resp_like = res_like["data"];
+          if (resp_like["Like"]) {
+            like.innerHTML = `<img
+            onclick=likeOutPost(${post_id})
+            id="${post_id}"
+            src="logos/likefill.png"
+            class="icon"
+            alt=""
+          />`;
+          } else {
+            like.innerHTML = `<img
+            onclick=likeOutPost(${post_id})
+            id="${post_id}"
+            src="logos/like.png"
+            class="icon"
+            alt=""
+          />`;
+          }
+        })
+        .catch((error) => console.log(error));
       let likes = document.getElementById("post_likes_popup");
       let caption = document.getElementById("post_acc_caption_popup");
       let comment_date = document.getElementById("post_comment_date_popup");
@@ -267,6 +311,14 @@ let openMyPopup = (post_id) => {
     .catch((error) => console.log(error));
 };
 let openAllPopup = (post_id, user_id) => {
+  let like = document.getElementById("like-section");
+  like.innerHTML = `<img
+            
+            id=${post_id}
+            src=""
+            class="icon"
+            alt=""
+          />`;
   axios
     .get(`http://127.0.0.1:8000/api/v0.1/posts/getpost/${post_id}`, {
       headers: { Authorization: localStorage.getItem("Token") },
@@ -288,7 +340,32 @@ let openAllPopup = (post_id, user_id) => {
           user_name.innerHTML = resp_user["User"]["username"];
         })
         .catch((error) => console.log(error));
-
+      axios
+        .get(`http://127.0.0.1:8000/api/v0.1/likes/get/${post_id}`, {
+          headers: { Authorization: localStorage.getItem("Token") },
+        })
+        .then((res_like) => {
+          let like = document.getElementById("like-section");
+          let resp_like = res_like["data"];
+          if (resp_like["Like"]) {
+            like.innerHTML = `<img
+            onclick=likeOutPost(${post_id})
+            id="${post_id}"
+            src="logos/likefill.png"
+            class="icon"
+            alt=""
+          />`;
+          } else {
+            like.innerHTML = `<img
+            onclick=likeOutPost(${post_id})
+            id="${post_id}"
+            src="logos/like.png"
+            class="icon"
+            alt=""
+          />`;
+          }
+        })
+        .catch((error) => console.log(error));
       let likes = document.getElementById("post_likes_popup");
       let caption = document.getElementById("post_acc_caption_popup");
       let comment_date = document.getElementById("post_comment_date_popup");
@@ -666,9 +743,17 @@ let getAllPosts = () => {
           .then((res_user) => {
             let resp_user = res_user["data"];
             let user = resp_user["User"];
-            let div = document.createElement("div");
-            div.setAttribute("class", "post");
-            div.innerHTML = `<div class="info">
+            axios
+              .get(`http://127.0.0.1:8000/api/v0.1/likes/get/${post["id"]}`, {
+                headers: { Authorization: localStorage.getItem("Token") },
+              })
+              .then((res_like) => {
+                let resp_like = res_like["data"];
+                if (resp_like["Like"]) {
+                  console.log("yes");
+                  let div = document.createElement("div");
+                  div.setAttribute("class", "post");
+                  div.innerHTML = `<div class="info">
               <div class="user">
                 <div class="profile-pic">
                   <img src="logos/${user["profile_picture"]}" alt="" />
@@ -680,8 +765,54 @@ let getAllPosts = () => {
             <div class="post-content">
               <div class="reaction-wrapper">
                 <img
-                  id="like_icon"
-                  onclick="likePost()"
+                  id="${post["id"]}"
+                  onclick="likeOutPost(${post["id"]})"
+                  src="logos/likefill.png"
+                  class="icon"
+                  alt=""
+                />
+                <img
+                  onclick="openAllPopup(${post["id"]},${user["id"]})"
+                  src="logos/comment.png"
+                  class="icon"
+                  alt=""
+                />
+              </div>
+              <p class="likes">${post["count_likes"]} likes</p>
+              <p class="description">
+                <span>${user["username"]} </span> ${post["caption"]}
+              </p>
+              <p  onclick="openAllPopup(${post["id"]})" class="view-comments">
+                View all 7 comments
+              </p>
+              <p class="post-time">${parsedDate}</p>
+            </div>
+            <div class="comment-wrapper">
+              <input
+                type="text"
+                class="comment-box"
+                placeholder="Add a comment"
+              />
+              <button class="comment-btn">post</button>
+            </div>`;
+                  document.getElementById("all-posts").appendChild(div);
+                } else {
+                  let div = document.createElement("div");
+                  div.setAttribute("class", "post");
+                  div.innerHTML = `<div class="info">
+              <div class="user">
+                <div class="profile-pic">
+                  <img src="logos/${user["profile_picture"]}" alt="" />
+                </div>
+                <p class="username">${user["username"]}</p>
+              </div>
+            </div>
+            <img src="logos/${post["post_image"]}" class="post-image" alt="" />
+            <div class="post-content">
+              <div class="reaction-wrapper">
+                <img
+                  id="${post["id"]}"
+                  onclick="likeOutPost(${post["id"]})"
                   src="logos/like.png"
                   class="icon"
                   alt=""
@@ -710,7 +841,10 @@ let getAllPosts = () => {
               />
               <button class="comment-btn">post</button>
             </div>`;
-            document.getElementById("all-posts").appendChild(div);
+                  document.getElementById("all-posts").appendChild(div);
+                }
+              })
+              .catch((error) => console.log(error));
           })
           .catch((error) => console.log(error));
       }
