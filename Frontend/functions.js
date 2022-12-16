@@ -1,63 +1,5 @@
-const openDeleteButtons = document.querySelectorAll("[data-delete-target]");
-const closeDeleteButtons = document.querySelectorAll("[data-close-button]");
-const openStory = document.querySelectorAll("[data-story-target]");
-const closeStory = document.querySelectorAll("[data-close-story-button]");
-const closeStoryButton = document.querySelectorAll("[data-close-button]");
-const openLogout = document.querySelectorAll("[data-logout-target]");
-const openComment = document.querySelectorAll("[data-comment-target]");
-const closeComment = document.querySelectorAll("[data-close-comment-button]");
-const deleteDeleteButtons = document.querySelectorAll("[data-delete-button]");
 const overlay = document.getElementById("overlay");
 
-openLogout.forEach((image) => {
-  image.addEventListener("click", () => {
-    const logout = document.querySelector(image.dataset.logoutTarget);
-    displayLogout(logout);
-  });
-});
-closeStoryButton.forEach((button) => {
-  button.addEventListener("click", () => {
-    const logout = button.closest(".logout-popup");
-    closeLogout(logout);
-  });
-});
-openDeleteButtons.forEach((image) => {
-  image.addEventListener("click", () => {
-    const delete_option = document.querySelector(image.dataset.deleteTarget);
-    displayOption(delete_option);
-  });
-});
-closeDeleteButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const delete_option = button.closest(".delete-popup");
-    closeOption(delete_option);
-  });
-});
-openComment.forEach((image) => {
-  image.addEventListener("click", () => {
-    const comment = document.querySelector(image.dataset.commentTarget);
-    displayComment(comment);
-  });
-});
-closeComment.forEach((button) => {
-  button.addEventListener("click", () => {
-    const comment = button.closest(".comment-popup");
-    closeComments(comment);
-  });
-});
-
-openStory.forEach((image) => {
-  image.addEventListener("click", () => {
-    const story = document.querySelector(image.dataset.storyTarget);
-    displayStatus(story);
-  });
-});
-closeStory.forEach((button) => {
-  button.addEventListener("click", () => {
-    const story = button.closest(".story-popup");
-    closeStatus(story);
-  });
-});
 let displayOption = (delete_option) => {
   delete_option.classList.add("active");
 };
@@ -264,6 +206,79 @@ let getProfileMain = () => {
     })
     .catch((error) => console.log(error));
 };
+
+let closeDeletePopup = () => {
+  let pop = document.getElementById("delete_pop");
+  closeOption(pop);
+};
+let closeMyPopup = () => {
+  let pop = document.getElementById("comment_pop");
+  closeComments(pop);
+};
+let openDeletePopup = () => {
+  let pop = document.getElementById("delete_pop");
+  displayOption(pop);
+};
+let openMyPopup = (post_id) => {
+  axios
+    .get(`http://127.0.0.1:8000/api/v0.1/posts/getpost/${post_id}`, {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res) => {
+      let resp = res["data"];
+      let post = resp["Post"];
+      let pop = document.getElementById("comment_pop");
+      let img = document.getElementById("post_image_popup");
+      axios
+        .get("http://127.0.0.1:8000/api/v0.1/users/get", {
+          headers: { Authorization: localStorage.getItem("Token") },
+        })
+        .then((res_user) => {
+          let resp_user = res_user["data"];
+          let user_img = document.getElementById("post_acc_img_popup");
+          let user_name = document.getElementById("post_acc_name_popup");
+          user_img.src = "logos/" + resp_user["User"]["profile_picture"];
+          user_name.innerHTML = resp_user["User"]["username"];
+        })
+        .catch((error) => console.log(error));
+
+      let likes = document.getElementById("post_likes_popup");
+      let comment_date = document.getElementById("post_comment_date_popup");
+      let comment_name = document.getElementById("post_comment_name_popup");
+      let comment_desc = document.getElementById("post_comment_desc_popup");
+      let comment_img = document.getElementById("post_comment_img_popup");
+      comment_img.src = "logos/cover 1.png";
+      comment_date.innerHTML = "2014-22-22";
+      comment_name.innerHTML = "Michelabidaoud";
+      comment_desc.innerHTML = "hi this is comment";
+      likes.innerHTML = post["count_likes"];
+      img.src = `logos/${post["post_image"]}`;
+      displayComment(pop);
+    })
+    .catch((error) => console.log(error));
+};
+let getPostsMain = () => {
+  axios
+    .get("http://127.0.0.1:8000/api/v0.1/posts/getmyposts", {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res) => {
+      let resp = res["data"];
+      let length_posts = resp["Post"].length;
+      for (let i = 0; i < length_posts; i++) {
+        let post = resp["Post"][i];
+        let div = document.createElement("div");
+        div.setAttribute("class", "post-display");
+        div.innerHTML = `<img
+        onclick="openMyPopup(${post["id"]})"
+          src="logos/${post["post_image"]}"
+          class="profile-post-size"
+        />`;
+        document.getElementById("profile-posts").appendChild(div);
+      }
+    })
+    .catch((error) => console.log(error));
+};
 let loadHome = () => {
   if (localStorage.getItem("Token") == null) {
     window.location.href = "../Frontend/signin.html";
@@ -320,6 +335,7 @@ let loadAccount = () => {
   let title = document.getElementById("title");
   title.innerHTML = "My Account";
   getProfileMain();
+  getPostsMain();
 };
 let loadMessenger = () => {
   if (localStorage.getItem("Token") == null) {

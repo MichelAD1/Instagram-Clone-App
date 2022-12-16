@@ -571,6 +571,19 @@ body {
   margin-top: 5px;
   margin-left: 10px;
 }
+.profile-pic-comments {
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 3px;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+.profile-pic-comments img {
+  width: 75%;
+  height: 75%;
+  object-fit: cover;
+  border-radius: 50%;
+}
 
 .profile-pic-chatting img {
   width: 80%;
@@ -709,7 +722,7 @@ body {
   text-align: start;
   font-weight: 350;
   font-size: 10px;
-  margin-left: -460px;
+  margin-left: -440px;
   margin-top: 40px;
   color: var(--prim-names-color);
 }
@@ -721,7 +734,7 @@ body {
   font-weight: 350;
   font-size: 13px;
   margin-top: 17px;
-  margin-left: -10px;
+  margin-left: -30px;
   color: var(--prim-names-color);
 }
 .username-comment {

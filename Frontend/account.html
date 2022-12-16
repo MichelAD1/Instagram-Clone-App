@@ -64,10 +64,8 @@
       <div class="wrapper">
         <div class="left-col">
           <div id="delete_pop" class="delete-popup">
-            <button data-delete-button class="delete-btn" id="delete_btn">
-              Delete Post
-            </button>
-            <button data-close-button class="x-btn">&times;</button>
+            <button class="delete-btn" id="delete_btn">Delete Post</button>
+            <button onclick="closeDeletePopup()" class="x-btn">&times;</button>
           </div>
           <div id="logout_pop" class="logout-popup">
             <button
@@ -80,64 +78,71 @@
             </button>
             <button data-close-button class="x-btn">&times;</button>
           </div>
-          <div id="comment_pop" class="comment-popup">
-            <img src="logos/cover 1.png" alt="" />
-            <div class="comment-section">
-              <div class="comment-account">
-                <div class="profile-pic-chatting">
-                  <img src="logos/cover 1.png" alt="" />
-                </div>
-                <p class="username-comment">user_name_2adaaaa</p>
-                <img
-                  data-delete-target="#delete_pop"
-                  src="logos/option.png"
-                  class="options"
-                  alt=""
-                />
-              </div>
-              <div class="comments-display">
-                <div class="comments">
-                  <div class="display-comment-info">
-                    <div class="profile-pic-chatting">
-                      <img src="logos/cover 1.png" alt="" />
-                    </div>
-                    <p class="username-comment-display">user_name_2adaaaa</p>
-                    <p class="desc-comment-display">
-                      Hi wassup im here to tell u that u are good adadd ads sd
-                      sd sssd adadaaaaaaa sdsd ssss dddd sdd sdsdsd sdsds ddd
-                      sddd ssss ddd fff ggg
-                    </p>
-                    <p class="date-time-comment">4h</p>
+          <div id="comment_popup">
+            <div id="comment_pop" class="comment-popup">
+              <img id="post_image_popup" src="" alt="" />
+              <div class="comment-section">
+                <div class="comment-account">
+                  <div class="profile-pic-comments">
+                    <img id="post_acc_img_popup" src="" alt="" />
                   </div>
-                </div>
-                <div class="add-comment-post">
-                  <input
-                    onclick="displaySend()"
-                    type="text"
-                    placeholder="Add a comment..."
+                  <p id="post_acc_name_popup" class="username-comment"></p>
+                  <img
+                    onclick="openDeletePopup()"
+                    src="logos/option.png"
+                    class="options"
+                    alt=""
                   />
-                  <button style="display: none" class="send-message-btn">
-                    post
-                  </button>
                 </div>
-                <div class="likes-section">
-                  <div class="post-like-wrapper">
-                    <img
-                      id="like_icon"
-                      onclick="likePost()"
-                      src="logos/like.png"
-                      class="icon"
-                      alt=""
-                    />
+                <div class="comments-display">
+                  <div class="comments">
+                    <div class="display-comment-info">
+                      <div class="profile-pic-chatting">
+                        <img id="post_comment_img_popup" src="" alt="" />
+                      </div>
+                      <p
+                        id="post_comment_name_popup"
+                        class="username-comment-display"
+                      ></p>
+                      <p
+                        id="post_comment_desc_popup"
+                        class="desc-comment-display"
+                      ></p>
+                      <p
+                        id="post_comment_date_popup"
+                        class="date-time-comment"
+                      ></p>
+                    </div>
                   </div>
-                  <p class="likes-post">1,012 likes</p>
+                  <div class="add-comment-post">
+                    <input
+                      onclick="displaySend()"
+                      type="text"
+                      placeholder="Add a comment..."
+                    />
+                    <button style="display: none" class="send-message-btn">
+                      post
+                    </button>
+                  </div>
+                  <div class="likes-section">
+                    <div class="post-like-wrapper">
+                      <img
+                        id="like_icon"
+                        onclick="likePost()"
+                        src="logos/like.png"
+                        class="icon"
+                        alt=""
+                      />
+                    </div>
+                    <p id="post_likes_popup" class="likes-post"></p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <button data-close-comment-button class="x-comment-btn">
-              &times;
-            </button>
+              <button onclick="closeMyPopup()" class="x-comment-btn">
+                &times;
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -147,50 +152,7 @@
       <h3>Posts</h3>
     </div>
     <div class="post-border"></div>
-    <div class="profile-posts">
-      <div class="post-display">
-        <img
-          data-comment-target="#comment_pop"
-          src="logos/cover 11.png"
-          class="profile-post-size"
-        />
-      </div>
-      <div class="post-display">
-        <img
-          data-comment-target="#comment_pop"
-          src="logos/cover 11.png"
-          class="profile-post-size"
-        />
-      </div>
-      <div class="post-display">
-        <img
-          data-comment-target="#comment_pop"
-          src="logos/cover 11.png"
-          class="profile-post-size"
-        />
-      </div>
-      <div class="post-display">
-        <img
-          data-comment-target="#comment_pop"
-          src="logos/cover 11.png"
-          class="profile-post-size"
-        />
-      </div>
-      <div class="post-display">
-        <img
-          data-comment-target="#comment_pop"
-          src="logos/cover 11.png"
-          class="profile-post-size"
-        />
-      </div>
-      <div class="post-display">
-        <img
-          data-comment-target="#comment_pop"
-          src="logos/cover 11.png"
-          class="profile-post-size"
-        />
-      </div>
-    </div>
+    <div id="profile-posts" class="profile-posts"></div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="functions.js" type="text/javascript"></script>
   </body>
