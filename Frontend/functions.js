@@ -60,9 +60,6 @@ closeStory.forEach((button) => {
 });
 let displayOption = (delete_option) => {
   delete_option.classList.add("active");
-  overlay.classList.add("active");
-  let nav = document.getElementById("nav");
-  nav.classList.add("active");
 };
 let displayLogout = (logout) => {
   logout.classList.add("active");
@@ -84,9 +81,6 @@ let displayComment = (comment) => {
 };
 let closeOption = (delete_option) => {
   delete_option.classList.remove("active");
-  overlay.classList.remove("active");
-  let nav = document.getElementById("nav");
-  nav.classList.remove("active");
 };
 let closeLogout = (logout) => {
   logout.classList.remove("active");
