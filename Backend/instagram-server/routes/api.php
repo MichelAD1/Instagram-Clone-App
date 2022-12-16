@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\StoryController;
 
 Route::group(["prefix" => "v0.1"], function() {
     Route::group(["prefix" => "users"], function() {
@@ -44,6 +45,10 @@ Route::group(["prefix" => "v0.1"], function() {
         Route::get("countfollowing/{id}",[FollowController::class,"getCountFollowing"]);
         Route::get("countfollower/{id}",[FollowController::class,"getCountFollower"]);
         Route::get("getfollowing",[FollowController::class,"getFollowing"]);
+    });
+    Route::group(["prefix" => "stories"], function() {
+        Route::post("add",[StoryController::class,"shareStory"]);
+        Route::get("gethome",[StoryController::class,"followingStory"]);
     });
 	
 });
