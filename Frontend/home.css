@@ -510,6 +510,7 @@ body {
 }
 .likes-section {
   display: flex;
+  flex-direction: row;
   justify-content: flex-start;
   margin-top: 375px;
   margin-left: 36px;
@@ -542,6 +543,7 @@ body {
 .comment-account {
   position: absolute;
   display: flex;
+  flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
   width: 568px;
@@ -550,6 +552,9 @@ body {
   border-bottom: 1px solid var(--prim-border-color);
   border-radius: 1px;
   margin-top: -10px;
+}
+.comment-account > p {
+  margin-left: 5px;
 }
 .chat-card {
   cursor: pointer;
@@ -571,16 +576,15 @@ body {
   margin-top: 5px;
   margin-left: 10px;
 }
-.profile-pic-comments {
+.profile-pic-comment {
   border-radius: 50%;
-  overflow: hidden;
   padding: 3px;
   margin-top: 5px;
   margin-left: 10px;
 }
-.profile-pic-comments img {
-  width: 60%;
-  height: 60%;
+.profile-pic-comment img {
+  width: 40px;
+  height: 40px;
   object-fit: cover;
   border-radius: 50%;
 }
@@ -748,6 +752,18 @@ body {
   margin-left: 0px;
   color: var(--prim-names-color);
 }
+.caption-comment {
+  position: absolute;
+  cursor: default;
+  overflow: hidden;
+  width: 440px;
+  font-weight: 400;
+  font-size: 13px;
+  margin-top: 55px;
+  margin-left: 80px;
+  color: var(--prim-names-color);
+}
+
 .username-chat {
   width: 111px;
   display: inline-block;

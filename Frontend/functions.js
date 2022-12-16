@@ -250,6 +250,7 @@ let openMyPopup = (post_id) => {
         .catch((error) => console.log(error));
 
       let likes = document.getElementById("post_likes_popup");
+      let caption = document.getElementById("post_acc_caption_popup");
       let comment_date = document.getElementById("post_comment_date_popup");
       let comment_name = document.getElementById("post_comment_name_popup");
       let comment_desc = document.getElementById("post_comment_desc_popup");
@@ -258,7 +259,8 @@ let openMyPopup = (post_id) => {
       comment_date.innerHTML = "2014-22-22";
       comment_name.innerHTML = "Michelabidaoud";
       comment_desc.innerHTML = "hi this is comment";
-      likes.innerHTML = post["count_likes"];
+      likes.innerHTML = post["count_likes"] + " likes";
+      caption.innerHTML = post["caption"];
       img.src = `logos/${post["post_image"]}`;
       displayComment(pop);
     })
@@ -581,4 +583,25 @@ let update = () => {
       }
     })
     .catch((error) => console.log(error));
+};
+let addPostStory = () => {
+  let type = document.getElementById("type").value;
+  let caption = document.getElementById("caption_form").value;
+  let image = document.getElementById("image_form").files[0].name;
+  let args = new FormData();
+  if (type === "post") {
+    args.append("caption", caption);
+    args.append("post_image", image);
+    axios
+      .post("http://127.0.0.1:8000/api/v0.1/posts/add", args, {
+        headers: { Authorization: localStorage.getItem("Token") },
+      })
+      .then((res) => {
+        window.location.href = "../Frontend/account.html";
+      })
+      .catch((err) => console.error(err.response.data));
+  } else {
+    args.append("caption", caption);
+    args.append("post_image", image);
+  }
 };
