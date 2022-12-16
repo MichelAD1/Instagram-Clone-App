@@ -263,7 +263,6 @@ let addComment = (post_id) => {
     })
     .catch((error) => console.log(error));
 };
-
 let openMyPopup = (post_id) => {
   let delete_btn = document.getElementById("delete_btn");
   let post_btn = document.getElementById("post_cmnt");
@@ -440,16 +439,55 @@ let openAllPopup = (post_id, user_id) => {
           }
         })
         .catch((error) => console.log(error));
+      axios
+        .get(`http://127.0.0.1:8000/api/v0.1/comments/get/${post_id}`, {
+          headers: { Authorization: localStorage.getItem("Token") },
+        })
+        .then((res_com) => {
+          let resp_com = res_com["data"];
+          let length_com = resp_com["Comment"].length;
+          for (let i = 0; i < length_com; i++) {
+            let comment = resp_com["Comment"][i];
+            const date = comment["created_at"];
+            const parsedDate = date.split("T")[0];
+            let commented_by = comment["commented_by"];
+            axios
+              .get(
+                `http://127.0.0.1:8000/api/v0.1/users/getpostedby/${commented_by}`,
+                {
+                  headers: { Authorization: localStorage.getItem("Token") },
+                }
+              )
+              .then((res_user) => {
+                let resp_user = res_user["data"];
+                console.log(resp_user);
+                let div = document.createElement("div");
+                div.setAttribute("class", "comments");
+                div.innerHTML = `<div class="display-comment-info">
+                  <div class="profile-pic-chatting">
+                    <img id="post_comment_img_popup" src="logos/${resp_user["User"]["profile_picture"]}" alt="" />
+                  </div>
+                  <p
+                    id="post_comment_name_popup"
+                    class="username-comment-display"
+                  >${resp_user["User"]["username"]}</p>
+                  <p
+                    id="post_comment_desc_popup"
+                    class="desc-comment-display"
+                  >${comment["content"]}</p>
+                  <p
+                    id="post_comment_date_popup"
+                    class="date-time-comment"
+                  >${parsedDate}</p>
+                </div>`;
+                document.getElementById("comments-section").appendChild(div);
+              })
+              .catch((error) => console.log(error));
+          }
+        })
+        .catch((error) => console.log(error));
       let likes = document.getElementById("post_likes_popup");
       let caption = document.getElementById("post_acc_caption_popup");
-      let comment_date = document.getElementById("post_comment_date_popup");
-      let comment_name = document.getElementById("post_comment_name_popup");
-      let comment_desc = document.getElementById("post_comment_desc_popup");
-      let comment_img = document.getElementById("post_comment_img_popup");
-      comment_img.src = "logos/cover 1.png";
-      comment_date.innerHTML = "2014-22-22";
-      comment_name.innerHTML = "Michelabidaoud";
-      comment_desc.innerHTML = "hi this is comment";
       likes.innerHTML = post["count_likes"] + " likes";
       caption.innerHTML = post["caption"];
       img.src = `logos/${post["post_image"]}`;
@@ -822,11 +860,19 @@ let getAllPosts = () => {
                 headers: { Authorization: localStorage.getItem("Token") },
               })
               .then((res_like) => {
-                let resp_like = res_like["data"];
-                if (resp_like["Like"]) {
-                  let div = document.createElement("div");
-                  div.setAttribute("class", "post");
-                  div.innerHTML = `<div class="info">
+                axios
+                  .get(
+                    `http://127.0.0.1:8000/api/v0.1/comments/count/${post["id"]}`,
+                    {
+                      headers: { Authorization: localStorage.getItem("Token") },
+                    }
+                  )
+                  .then((res_count) => {
+                    let resp_like = res_like["data"];
+                    if (resp_like["Like"]) {
+                      let div = document.createElement("div");
+                      div.setAttribute("class", "post");
+                      div.innerHTML = `<div class="info">
               <div class="user">
                 <div class="profile-pic">
                   <img src="logos/${user["profile_picture"]}" alt="" />
@@ -856,23 +902,16 @@ let getAllPosts = () => {
                 <span>${user["username"]} </span> ${post["caption"]}
               </p>
               <p  onclick="openAllPopup(${post["id"]})" class="view-comments">
-                View all 7 comments
+                View all ${res_count["data"]["Comment"]} comments
               </p>
               <p class="post-time">${parsedDate}</p>
             </div>
-            <div class="comment-wrapper">
-              <input
-                type="text"
-                class="comment-box"
-                placeholder="Add a comment"
-              />
-              <button class="comment-btn">post</button>
-            </div>`;
-                  document.getElementById("all-posts").appendChild(div);
-                } else {
-                  let div = document.createElement("div");
-                  div.setAttribute("class", "post");
-                  div.innerHTML = `<div class="info">
+            `;
+                      document.getElementById("all-posts").appendChild(div);
+                    } else {
+                      let div = document.createElement("div");
+                      div.setAttribute("class", "post");
+                      div.innerHTML = `<div class="info">
               <div class="user">
                 <div class="profile-pic">
                   <img src="logos/${user["profile_picture"]}" alt="" />
@@ -902,20 +941,15 @@ let getAllPosts = () => {
                 <span>${user["username"]} </span> ${post["caption"]}
               </p>
               <p  onclick="openAllPopup(${post["id"]})" class="view-comments">
-                View all 7 comments
+                View all ${res_count["data"]["Comment"]} comments
               </p>
               <p class="post-time">${parsedDate}</p>
             </div>
-            <div class="comment-wrapper">
-              <input
-                type="text"
-                class="comment-box"
-                placeholder="Add a comment"
-              />
-              <button class="comment-btn">post</button>
-            </div>`;
-                  document.getElementById("all-posts").appendChild(div);
-                }
+            `;
+                      document.getElementById("all-posts").appendChild(div);
+                    }
+                  })
+                  .catch((error) => console.log(error));
               })
               .catch((error) => console.log(error));
           })
