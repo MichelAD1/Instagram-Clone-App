@@ -237,7 +237,19 @@ let openDeletePopup = () => {
   let pop = document.getElementById("delete_pop");
   displayOption(pop);
 };
+let deletePost = (post_id) => {
+  axios
+    .get(`http://127.0.0.1:8000/api/v0.1/posts/delete/${post_id}`, {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res) => {
+      window.location.href = "../Frontend/account.html";
+    })
+    .catch((error) => console.log(error));
+};
 let openMyPopup = (post_id) => {
+  let delete_btn = document.getElementById("delete_btn");
+  delete_btn.setAttribute("onclick", `deletePost(${post_id})`);
   let like = document.getElementById("like-section");
   like.innerHTML = `<img
             
