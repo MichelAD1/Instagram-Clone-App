@@ -42,4 +42,11 @@ class PostController extends Controller
         ]);
         
     }
+    function getPost($id){
+        $post = post::find($id);
+        return response()->json([
+            "Post" => $post
+        ]);
+        
+    }
 }
