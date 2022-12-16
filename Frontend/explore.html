@@ -74,154 +74,73 @@
             </button>
             <button onclick="closeLogoutPopup()" class="x-btn">&times;</button>
           </div>
-          <div id="delete_pop" class="delete-popup">
-            <button data-delete-button class="delete-btn" id="delete_btn">
-              Delete Post
-            </button>
-            <button data-close-button class="x-btn">&times;</button>
-          </div>
-          <div id="comment_pop" class="comment-popup">
-            <img src="logos/cover 1.png" alt="" />
-            <div class="comment-section">
-              <div class="comment-account">
-                <div class="profile-pic-chatting">
-                  <img src="logos/cover 1.png" alt="" />
-                </div>
-                <p class="username-comment">user_name_2adaaaa</p>
-                <img
-                  data-delete-target="#delete_pop"
-                  src="logos/option.png"
-                  class="options"
-                  alt=""
-                />
-              </div>
-              <div class="comments-display">
-                <div class="comments">
-                  <div class="display-comment-info">
-                    <div class="profile-pic-chatting">
-                      <img src="logos/cover 1.png" alt="" />
-                    </div>
-                    <p class="username-comment-display">user_name_2adaaaa</p>
-                    <p class="desc-comment-display">
-                      Hi wassup im here to tell u that u are good adadd ads sd
-                      sd sssd adadaaaaaaa sdsd ssss dddd sdd sdsdsd sdsds ddd
-                      sddd ssss ddd fff ggg
-                    </p>
-                    <p class="date-time-comment">4h</p>
-                  </div>
-                </div>
-                <div class="add-comment-post">
-                  <input
-                    onclick="displaySend()"
-                    type="text"
-                    placeholder="Add a comment..."
-                  />
-                  <button style="display: none" class="send-message-btn">
-                    post
-                  </button>
-                </div>
-                <div class="likes-section">
-                  <div class="post-like-wrapper">
+
+          <div id="comment_popup">
+            <div id="comment_pop" class="comment-popup">
+              <img id="post_image_popup" src="" alt="" />
+              <div class="comment-section">
+                <div class="comment-account">
+                  <div class="profile-pic-comment">
                     <img
-                      id="like_icon"
-                      onclick="likePost()"
-                      src="logos/like.png"
-                      class="icon"
+                      id="post_acc_img_popup"
+                      src="logos/cover 8.png"
                       alt=""
                     />
                   </div>
+                  <p id="post_acc_name_popup" class="username-comment"></p>
+                </div>
+                <div class="comments-display">
+                  <div class="comments">
+                    <div class="display-comment-info">
+                      <div class="profile-pic-chatting">
+                        <img id="post_comment_img_popup" src="" alt="" />
+                      </div>
+                      <p
+                        id="post_comment_name_popup"
+                        class="username-comment-display"
+                      ></p>
+                      <p
+                        id="post_comment_desc_popup"
+                        class="desc-comment-display"
+                      ></p>
+                      <p
+                        id="post_comment_date_popup"
+                        class="date-time-comment"
+                      ></p>
+                    </div>
+                  </div>
+                  <div class="add-comment-post">
+                    <input
+                      onclick="displaySend()"
+                      type="text"
+                      placeholder="Add a comment..."
+                    />
+                    <button style="display: none" class="send-message-btn">
+                      post
+                    </button>
+                  </div>
+                  <div class="likes-section">
+                    <p id="post_acc_caption_popup" class="caption-comment"></p>
+                    <div class="post-like-wrapper">
+                      <img
+                        id="like_icon"
+                        onclick="likePost()"
+                        src="logos/like.png"
+                        class="icon"
+                        alt=""
+                      />
+                    </div>
+                    <p id="post_likes_popup" class="likes-post"></p>
+                  </div>
+                </div>
+              </div>
 
-                  <p class="likes-post">1,012 likes</p>
-                </div>
-              </div>
-            </div>
-
-            <button data-close-comment-button class="x-comment-btn">
-              &times;
-            </button>
-          </div>
-          <div class="post">
-            <div class="info">
-              <div class="user">
-                <div class="profile-pic">
-                  <img src="logos/cover 1.png" alt="" />
-                </div>
-                <p class="username">Michel</p>
-              </div>
-            </div>
-            <img src="logos/cover 1.png" class="post-image" alt="" />
-            <div class="post-content">
-              <div class="reaction-wrapper">
-                <img
-                  id="like_icon"
-                  onclick="likePost()"
-                  src="logos/like.png"
-                  class="icon"
-                  alt=""
-                />
-                <img
-                  data-comment-target="#comment_pop"
-                  src="logos/comment.png"
-                  class="icon"
-                  alt=""
-                />
-              </div>
-              <p class="likes">1,012 likes</p>
-              <p class="description">
-                <span>username </span> what are you doing
-              </p>
-              <p data-comment-target="#comment_pop" class="view-comments">
-                View all 7 comments
-              </p>
-              <p class="post-time">2 minutes ago</p>
-            </div>
-            <div class="comment-wrapper">
-              <input
-                type="text"
-                class="comment-box"
-                placeholder="Add a comment"
-              />
-              <button class="comment-btn">post</button>
+              <button onclick="closeMyPopup()" class="x-comment-btn">
+                &times;
+              </button>
             </div>
           </div>
-          <div class="post">
-            <div class="info">
-              <div class="user">
-                <div class="profile-pic">
-                  <img src="logos/cover 1.png" alt="" />
-                </div>
-                <p class="username">Michel</p>
-              </div>
-            </div>
-            <img src="logos/cover 1.png" class="post-image" alt="" />
-            <div class="post-content">
-              <div class="reaction-wrapper">
-                <img src="logos/like.png" class="icon" alt="" />
-                <img
-                  data-comment-target="#comment_pop"
-                  src="logos/comment.png"
-                  class="icon"
-                  alt=""
-                />
-              </div>
-              <p class="likes">1,012 likes</p>
-              <p class="description">
-                <span>username </span> what are you doing
-              </p>
-              <p data-comment-target="#comment_pop" class="view-comments">
-                View all 7 comments
-              </p>
-              <p class="post-time">2 minutes ago</p>
-            </div>
-            <div class="comment-wrapper">
-              <input
-                type="text"
-                class="comment-box"
-                placeholder="Add a comment"
-              />
-              <button class="comment-btn">post</button>
-            </div>
-          </div>
+          <div id="all-posts"></div>
         </div>
       </div>
     </div>

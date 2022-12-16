@@ -266,6 +266,46 @@ let openMyPopup = (post_id) => {
     })
     .catch((error) => console.log(error));
 };
+let openAllPopup = (post_id, user_id) => {
+  axios
+    .get(`http://127.0.0.1:8000/api/v0.1/posts/getpost/${post_id}`, {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res) => {
+      let resp = res["data"];
+      let post = resp["Post"];
+      let pop = document.getElementById("comment_pop");
+      let img = document.getElementById("post_image_popup");
+      axios
+        .get(`http://127.0.0.1:8000/api/v0.1/users/getpostedby/${user_id}`, {
+          headers: { Authorization: localStorage.getItem("Token") },
+        })
+        .then((res_user) => {
+          let resp_user = res_user["data"];
+          let user_img = document.getElementById("post_acc_img_popup");
+          let user_name = document.getElementById("post_acc_name_popup");
+          user_img.src = "logos/" + resp_user["User"]["profile_picture"];
+          user_name.innerHTML = resp_user["User"]["username"];
+        })
+        .catch((error) => console.log(error));
+
+      let likes = document.getElementById("post_likes_popup");
+      let caption = document.getElementById("post_acc_caption_popup");
+      let comment_date = document.getElementById("post_comment_date_popup");
+      let comment_name = document.getElementById("post_comment_name_popup");
+      let comment_desc = document.getElementById("post_comment_desc_popup");
+      let comment_img = document.getElementById("post_comment_img_popup");
+      comment_img.src = "logos/cover 1.png";
+      comment_date.innerHTML = "2014-22-22";
+      comment_name.innerHTML = "Michelabidaoud";
+      comment_desc.innerHTML = "hi this is comment";
+      likes.innerHTML = post["count_likes"] + " likes";
+      caption.innerHTML = post["caption"];
+      img.src = `logos/${post["post_image"]}`;
+      displayComment(pop);
+    })
+    .catch((error) => console.log(error));
+};
 let getPostsMain = () => {
   axios
     .get("http://127.0.0.1:8000/api/v0.1/posts/getmyposts", {
@@ -399,6 +439,7 @@ let loadExplore = () => {
   searchh.style.display = "none";
   let title = document.getElementById("title");
   title.innerHTML = "Instagram";
+  getAllPosts();
 };
 let loadAdd = () => {
   if (localStorage.getItem("Token") == null) {
@@ -604,4 +645,75 @@ let addPostStory = () => {
     args.append("caption", caption);
     args.append("post_image", image);
   }
+};
+let getAllPosts = () => {
+  axios
+    .get("http://127.0.0.1:8000/api/v0.1/posts/getallposts", {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res) => {
+      let resp = res["data"];
+      let length_posts = resp["Post"].length;
+      for (let i = 0; i < length_posts; i++) {
+        let post = resp["Post"][i];
+        const date = post["created_at"];
+        const parsedDate = date.split("T")[0];
+        let post_id = post["posted_by"];
+        axios
+          .get(`http://127.0.0.1:8000/api/v0.1/users/getpostedby/${post_id}`, {
+            headers: { Authorization: localStorage.getItem("Token") },
+          })
+          .then((res_user) => {
+            let resp_user = res_user["data"];
+            let user = resp_user["User"];
+            let div = document.createElement("div");
+            div.setAttribute("class", "post");
+            div.innerHTML = `<div class="info">
+              <div class="user">
+                <div class="profile-pic">
+                  <img src="logos/${user["profile_picture"]}" alt="" />
+                </div>
+                <p class="username">${user["username"]}</p>
+              </div>
+            </div>
+            <img src="logos/${post["post_image"]}" class="post-image" alt="" />
+            <div class="post-content">
+              <div class="reaction-wrapper">
+                <img
+                  id="like_icon"
+                  onclick="likePost()"
+                  src="logos/like.png"
+                  class="icon"
+                  alt=""
+                />
+                <img
+                  onclick="openAllPopup(${post["id"]},${user["id"]})"
+                  src="logos/comment.png"
+                  class="icon"
+                  alt=""
+                />
+              </div>
+              <p class="likes">${post["count_likes"]} likes</p>
+              <p class="description">
+                <span>${user["username"]} </span> ${post["caption"]}
+              </p>
+              <p  onclick="openAllPopup(${post["id"]})" class="view-comments">
+                View all 7 comments
+              </p>
+              <p class="post-time">${parsedDate}</p>
+            </div>
+            <div class="comment-wrapper">
+              <input
+                type="text"
+                class="comment-box"
+                placeholder="Add a comment"
+              />
+              <button class="comment-btn">post</button>
+            </div>`;
+            document.getElementById("all-posts").appendChild(div);
+          })
+          .catch((error) => console.log(error));
+      }
+    })
+    .catch((error) => console.log(error));
 };
