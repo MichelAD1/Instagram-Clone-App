@@ -829,6 +829,35 @@ let getPostsUser = (username) => {
     })
     .catch((error) => console.log(error));
 };
+let checkStories = () => {
+  axios
+    .get("http://127.0.0.1:8000/api/v0.1/stories/gettimes", {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((time) => {
+      let resp = time["data"];
+      let length = resp["Story"].length;
+      for (let i = 0; i < length; i++) {
+        let time = resp["Story"][i]["created_at"];
+        let today = Date.now();
+        today = new Date(today);
+        time = new Date(time);
+        let date_diff = (today - time) / 60000;
+        if (date_diff > 140) {
+          axios
+            .get(
+              `http://127.0.0.1:8000/api/v0.1/stories/delete/${resp["Story"][i]["id"]}`,
+              {
+                headers: { Authorization: localStorage.getItem("Token") },
+              }
+            )
+            .then((res) => {})
+            .catch((error) => console.log(error));
+        }
+      }
+    })
+    .catch((error) => console.log(error));
+};
 let loadHome = () => {
   if (localStorage.getItem("Token") == null) {
     window.location.href = "../Frontend/signin.html";
@@ -855,6 +884,7 @@ let loadHome = () => {
   searchh.style.display = "none";
   let title = document.getElementById("title");
   title.innerHTML = "Instagram";
+  checkStories();
   getProfileHome();
   getFollowingPosts();
   getFollowingStories();
@@ -1475,7 +1505,6 @@ let getFollowingStories = () => {
       let length_posts = resp["Story"].length;
       for (let i = 0; i < length_posts; i++) {
         let post = resp["Story"][i];
-        console.log(post);
         let post_id = post["posted_by"];
         axios
           .get(`http://127.0.0.1:8000/api/v0.1/users/getpostedby/${post_id}`, {
