@@ -100,32 +100,19 @@
                   />
                 </div>
                 <div class="comments-display">
-                  <div class="comments">
-                    <div class="display-comment-info">
-                      <div class="profile-pic-chatting">
-                        <img id="post_comment_img_popup" src="" alt="" />
-                      </div>
-                      <p
-                        id="post_comment_name_popup"
-                        class="username-comment-display"
-                      ></p>
-                      <p
-                        id="post_comment_desc_popup"
-                        class="desc-comment-display"
-                      ></p>
-                      <p
-                        id="post_comment_date_popup"
-                        class="date-time-comment"
-                      ></p>
-                    </div>
-                  </div>
+                  <div id="comments-section"></div>
                   <div class="add-comment-post">
                     <input
+                      id="comment"
                       onclick="displaySend()"
                       type="text"
                       placeholder="Add a comment..."
                     />
-                    <button style="display: none" class="send-message-btn">
+                    <button
+                      id="post_cmnt"
+                      style="display: none"
+                      class="send-message-btn"
+                    >
                       post
                     </button>
                   </div>

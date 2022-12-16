@@ -41,6 +41,7 @@ let closeComments = (comment) => {
   overlay.classList.remove("active");
   let nav = document.getElementById("nav");
   nav.classList.remove("active");
+  document.getElementById("comments-section").innerHTML = "";
 };
 let splashScreen = () => {
   setTimeout(() => {
@@ -247,8 +248,26 @@ let deletePost = (post_id) => {
     })
     .catch((error) => console.log(error));
 };
+let addComment = (post_id) => {
+  let content = document.getElementById("comment");
+  let args = new FormData();
+  args.append("post_id", post_id);
+  args.append("content", content.value);
+  axios
+    .post("http://127.0.0.1:8000/api/v0.1/comments/add", args, {
+      headers: { Authorization: localStorage.getItem("Token") },
+    })
+    .then((res) => {
+      let resp = res["data"];
+      window.location.href = "../Frontend/account.html";
+    })
+    .catch((error) => console.log(error));
+};
+
 let openMyPopup = (post_id) => {
   let delete_btn = document.getElementById("delete_btn");
+  let post_btn = document.getElementById("post_cmnt");
+  post_btn.setAttribute("onclick", `addComment(${post_id})`);
   delete_btn.setAttribute("onclick", `deletePost(${post_id})`);
   let like = document.getElementById("like-section");
   like.innerHTML = `<img
@@ -305,16 +324,57 @@ let openMyPopup = (post_id) => {
           }
         })
         .catch((error) => console.log(error));
+      axios
+        .get(`http://127.0.0.1:8000/api/v0.1/comments/get/${post_id}`, {
+          headers: { Authorization: localStorage.getItem("Token") },
+        })
+        .then((res_com) => {
+          let resp_com = res_com["data"];
+          let length_com = resp_com["Comment"].length;
+          for (let i = 0; i < length_com; i++) {
+            let comment = resp_com["Comment"][i];
+            const date = comment["created_at"];
+            const parsedDate = date.split("T")[0];
+            let commented_by = comment["commented_by"];
+
+            axios
+              .get(
+                `http://127.0.0.1:8000/api/v0.1/users/getpostedby/${commented_by}`,
+                {
+                  headers: { Authorization: localStorage.getItem("Token") },
+                }
+              )
+              .then((res_user) => {
+                let resp_user = res_user["data"];
+                console.log(resp_user);
+                let div = document.createElement("div");
+                div.setAttribute("class", "comments");
+                div.innerHTML = `<div class="display-comment-info">
+                  <div class="profile-pic-chatting">
+                    <img id="post_comment_img_popup" src="logos/${resp_user["User"]["profile_picture"]}" alt="" />
+                  </div>
+                  <p
+                    id="post_comment_name_popup"
+                    class="username-comment-display"
+                  >${resp_user["User"]["username"]}</p>
+                  <p
+                    id="post_comment_desc_popup"
+                    class="desc-comment-display"
+                  >${comment["content"]}</p>
+                  <p
+                    id="post_comment_date_popup"
+                    class="date-time-comment"
+                  >${parsedDate}</p>
+                </div>`;
+                document.getElementById("comments-section").appendChild(div);
+              })
+              .catch((error) => console.log(error));
+          }
+        })
+        .catch((error) => console.log(error));
+
       let likes = document.getElementById("post_likes_popup");
       let caption = document.getElementById("post_acc_caption_popup");
-      let comment_date = document.getElementById("post_comment_date_popup");
-      let comment_name = document.getElementById("post_comment_name_popup");
-      let comment_desc = document.getElementById("post_comment_desc_popup");
-      let comment_img = document.getElementById("post_comment_img_popup");
-      comment_img.src = "logos/cover 1.png";
-      comment_date.innerHTML = "2014-22-22";
-      comment_name.innerHTML = "Michelabidaoud";
-      comment_desc.innerHTML = "hi this is comment";
       likes.innerHTML = post["count_likes"] + " likes";
       caption.innerHTML = post["caption"];
       img.src = `logos/${post["post_image"]}`;
@@ -324,6 +384,8 @@ let openMyPopup = (post_id) => {
 };
 let openAllPopup = (post_id, user_id) => {
   let like = document.getElementById("like-section");
+  let post_btn = document.getElementById("post_cmnt");
+  post_btn.setAttribute("onclick", `addComment(${post_id})`);
   like.innerHTML = `<img
             
             id=${post_id}
@@ -762,7 +824,6 @@ let getAllPosts = () => {
               .then((res_like) => {
                 let resp_like = res_like["data"];
                 if (resp_like["Like"]) {
-                  console.log("yes");
                   let div = document.createElement("div");
                   div.setAttribute("class", "post");
                   div.innerHTML = `<div class="info">
