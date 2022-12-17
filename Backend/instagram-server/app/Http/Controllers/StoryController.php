@@ -50,7 +50,7 @@ class StoryController extends Controller
     function getTime(){
         $story = story::all();
         return response()->json([
-            "Story" => $story->pluck('created_at')
+            "Story" => $story
         ]);
         
     }
