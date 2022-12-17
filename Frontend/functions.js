@@ -838,12 +838,13 @@ let checkStories = () => {
       let resp = time["data"];
       let length = resp["Story"].length;
       for (let i = 0; i < length; i++) {
-        let time = resp["Story"][i]["created_at"];
+        let timee = resp["Story"][i]["created_at"];
         let today = Date.now();
         today = new Date(today);
-        time = new Date(time);
-        let date_diff = (today - time) / 60000;
+        timee = new Date(timee);
+        let date_diff = (today - timee) / 60000;
         if (date_diff > 140) {
+          console.log(resp["Story"][i]["id"]);
           axios
             .get(
               `http://127.0.0.1:8000/api/v0.1/stories/delete/${resp["Story"][i]["id"]}`,
