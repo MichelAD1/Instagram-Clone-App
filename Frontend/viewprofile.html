@@ -66,6 +66,17 @@
     <div class="main-home">
       <div class="wrapper">
         <div class="left-col">
+          <div id="logout_pop" class="logout-popup">
+            <button
+              onclick="logOut()"
+              data-logout-button
+              class="delete-btn"
+              id="logout_btn"
+            >
+              Log out
+            </button>
+            <button onclick="closeLogoutPopup()" class="x-btn">&times;</button>
+          </div>
           <div id="comment_popup">
             <div id="comment_pop" class="comment-popup">
               <img id="post_image_popup" src="" alt="" />

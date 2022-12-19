@@ -1129,12 +1129,18 @@ let signUp = () => {
       data: args,
     })
       .then((res) => {
-        let resp = res.data.authorisation.token;
-        localStorage.setItem("Token", "Bearer " + resp);
-        axios.defaults.headers.common["Authorization"] = "Bearer" + resp;
-        window.location.href = "../Frontend/home.html";
+        if (res["data"]["User"] === "Exist") {
+          let msg = document.querySelector(".empty-fields");
+          msg.style.display = "block";
+          msg.innerHTML = "Invalid username";
+        } else {
+          let resp = res.data.authorisation.token;
+          localStorage.setItem("Token", "Bearer " + resp);
+          axios.defaults.headers.common["Authorization"] = "Bearer" + resp;
+          window.location.href = "../Frontend/home.html";
+        }
       })
-      .catch((err) => console.error(err.response.data));
+      .catch((error) => console.log(error));
   }
 };
 let logOut = () => {
