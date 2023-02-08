@@ -1136,6 +1136,7 @@ let signUp = () => {
         } else {
           let resp = res.data.authorisation.token;
           localStorage.setItem("Token", "Bearer " + resp);
+          localStorage.setItem("Dark", "off");
           axios.defaults.headers.common["Authorization"] = "Bearer" + resp;
           window.location.href = "../Frontend/home.html";
         }
@@ -1179,6 +1180,7 @@ let signIn = () => {
         } else {
           resp = res.data.authorisation.token;
           localStorage.setItem("Token", "Bearer " + resp);
+          localStorage.setItem("Dark", "off");
           axios.defaults.headers.common["Authorization"] = "Bearer" + resp;
           window.location.href = "../Frontend/home.html";
         }
